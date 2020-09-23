@@ -1,6 +1,4 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBroom } from '@fortawesome/free-solid-svg-icons';
+import { faBroom,faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
-library.add(
-  faBroom
-);
+library.add(faBroom, faPencilAlt);
