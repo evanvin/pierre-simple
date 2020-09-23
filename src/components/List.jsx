@@ -5,9 +5,12 @@ import {
   Icon,
   Button,
   Form,
+  Tag,
   Navbar,
   Heading,
+  Columns,
 } from 'react-bulma-components';
+import { faColumns } from '@fortawesome/free-solid-svg-icons';
 const { Input, Control } = Form;
 
 class List extends React.Component {
@@ -25,12 +28,6 @@ class List extends React.Component {
         <Navbar color='dark' fixed='top'>
           <Navbar.Brand>
             <Navbar.Item>
-              {/* <img
-                src='https://bulma.io/images/bulma-logo.png'
-                alt='Bulma: a modern CSS framework based on Flexbox'
-                width='112'
-                height='28'
-              /> */}
               <Heading size={3} className='has-text-primary'>
                 Pierre
               </Heading>
@@ -61,55 +58,30 @@ class List extends React.Component {
               />
             </Control>
           </Panel.Block>
-          <Panel.Block renderAs='a' active>
-            <Panel.Icon renderAs={Icon} icon='angle-down' />
-            bulma
-          </Panel.Block>
-          <Panel.Block>
-            <Panel.Icon renderAs={Icon} icon='angle-down' />
-            react-bulma-components
-          </Panel.Block>
-          <Panel.Block>
-            <Panel.Icon renderAs={Icon} icon='angle-down' />
-            minireset.css
-          </Panel.Block>
-          <Panel.Block>
-            <Panel.Icon renderAs={Icon} icon='angle-down' />
-            jgthms.github.io
-          </Panel.Block>
-          <Panel.Block>
-            <Panel.Icon renderAs={Icon} icon='angle-down' />
-            couds.gidhub.io
-          </Panel.Block>
-          <Panel.Block>
-            <Panel.Icon renderAs={Icon} icon='angle-down' />
-            mojs
-          </Panel.Block>
 
-          <Panel.Block renderAs='a' active>
-            <Panel.Icon renderAs={Icon} icon='angle-down' />
-            bulma
-          </Panel.Block>
+          {/* {this.props.list.map((item) => ( */}
           <Panel.Block>
-            <Panel.Icon renderAs={Icon} icon='angle-down' />
-            react-bulma-components
+            <Columns.Column size={6}>Hey</Columns.Column>
+            <Columns.Column size={6}>
+              <Tag.Group gapless className='is-pulled-right'>
+                <Tag
+                  color='primary'
+                  size='medium'
+                  rounded
+                  className='is-unselectable'
+                >
+                  2
+                </Tag>
+                <Tag size='medium' color='dark' rounded>
+                  <FontAwesomeIcon
+                    icon={['fa', 'pencil-alt']}
+                    className='clickable'
+                  />
+                </Tag>
+              </Tag.Group>
+            </Columns.Column>
           </Panel.Block>
-          <Panel.Block>
-            <Panel.Icon renderAs={Icon} icon='angle-down' />
-            minireset.css
-          </Panel.Block>
-          <Panel.Block>
-            <Panel.Icon renderAs={Icon} icon='angle-down' />
-            jgthms.github.io
-          </Panel.Block>
-          <Panel.Block>
-            <Panel.Icon renderAs={Icon} icon='angle-down' />
-            couds.gidhub.io
-          </Panel.Block>
-          <Panel.Block>
-            <Panel.Icon renderAs={Icon} icon='angle-down' />
-            mojs
-          </Panel.Block>
+          {/* ))} */}
         </Panel>
       </>
     );
