@@ -1,25 +1,29 @@
 {
   "files": {
-    "main.css": "/pierre-simple/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/pierre-simple/static/js/main.808f0e9a.chunk.js",
-    "main.js.map": "/pierre-simple/static/js/main.808f0e9a.chunk.js.map",
+    "main.css": "/pierre-simple/static/css/main.6525596a.chunk.css",
+    "main.js": "/pierre-simple/static/js/main.d4a94f7c.chunk.js",
+    "main.js.map": "/pierre-simple/static/js/main.d4a94f7c.chunk.js.map",
     "runtime-main.js": "/pierre-simple/static/js/runtime-main.42a0344c.js",
     "runtime-main.js.map": "/pierre-simple/static/js/runtime-main.42a0344c.js.map",
     "static/css/2.0111e717.chunk.css": "/pierre-simple/static/css/2.0111e717.chunk.css",
-    "static/js/2.11595c25.chunk.js": "/pierre-simple/static/js/2.11595c25.chunk.js",
-    "static/js/2.11595c25.chunk.js.map": "/pierre-simple/static/js/2.11595c25.chunk.js.map",
+    "static/js/2.507e0658.chunk.js": "/pierre-simple/static/js/2.507e0658.chunk.js",
+    "static/js/2.507e0658.chunk.js.map": "/pierre-simple/static/js/2.507e0658.chunk.js.map",
     "index.html": "/pierre-simple/index.html",
-    "precache-manifest.2fb5d5e3079f58d676ed2db224dbd933.js": "/pierre-simple/precache-manifest.2fb5d5e3079f58d676ed2db224dbd933.js",
+    "precache-manifest.519594e04540b96d31bae40b181ec302.js": "/pierre-simple/precache-manifest.519594e04540b96d31bae40b181ec302.js",
     "service-worker.js": "/pierre-simple/service-worker.js",
     "static/css/2.0111e717.chunk.css.map": "/pierre-simple/static/css/2.0111e717.chunk.css.map",
-    "static/css/main.5ecd60fb.chunk.css.map": "/pierre-simple/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.11595c25.chunk.js.LICENSE.txt": "/pierre-simple/static/js/2.11595c25.chunk.js.LICENSE.txt"
+    "static/css/main.6525596a.chunk.css.map": "/pierre-simple/static/css/main.6525596a.chunk.css.map",
+    "static/js/2.507e0658.chunk.js.LICENSE.txt": "/pierre-simple/static/js/2.507e0658.chunk.js.LICENSE.txt",
+    "static/media/aldi.25328789.svg": "/pierre-simple/static/media/aldi.25328789.svg",
+    "static/media/other.52bcb59b.svg": "/pierre-simple/static/media/other.52bcb59b.svg",
+    "static/media/safeway.93c22d01.svg": "/pierre-simple/static/media/safeway.93c22d01.svg",
+    "static/media/walmart.b228cfc5.svg": "/pierre-simple/static/media/walmart.b228cfc5.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.42a0344c.js",
     "static/css/2.0111e717.chunk.css",
-    "static/js/2.11595c25.chunk.js",
-    "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.808f0e9a.chunk.js"
+    "static/js/2.507e0658.chunk.js",
+    "static/css/main.6525596a.chunk.css",
+    "static/js/main.d4a94f7c.chunk.js"
   ]
 }
