@@ -1,3 +1,4 @@
+import { formatList } from './utils/utils';
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 
@@ -65,7 +66,10 @@ class App extends React.Component {
   printList = (e) => {
     e.preventDefault();
     axios
-      .post('https://pierre-289818.uc.r.appspot.com/publish', this.state.list)
+      .post(
+        'https://pierre-289818.uc.r.appspot.com/publish',
+        formatList(this.state.list)
+      )
       .then((res) => {
         console.log(res);
       });

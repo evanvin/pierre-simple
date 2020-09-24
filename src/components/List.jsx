@@ -1,4 +1,4 @@
-import { getStoreIcon } from '../utils/store.utils';
+import { getStoreIcon } from '../utils/utils';
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -13,7 +13,6 @@ import {
   Modal,
 } from 'react-bulma-components';
 const { Input, Control, Field, Label } = Form;
-
 
 class List extends React.Component {
   state = {
@@ -65,6 +64,8 @@ class List extends React.Component {
     );
 
     if (!itemNamesNew.includes(itemToEdit.name.toUpperCase())) {
+      itemToEdit.name = itemToEdit.name.toUpperCase();
+      itemToEdit.aisle = itemToEdit.aisle.toUpperCase();
       update(itemToEditPrevName, itemToEdit);
       this.setState({
         itemToEditPrevName: '',
@@ -202,16 +203,16 @@ class List extends React.Component {
           </Box>
           {this.props.list.map((item) => (
             <Panel.Block key={`item-${item.name}`}>
-              <Columns.Column size={6} mobile={{ size: 6 }}>
+              <Columns.Column mobile={{ size: 5 }}>
                 {item.name}
               </Columns.Column>
-              <Columns.Column mobile={{ size: 3 }}>
+              <Columns.Column mobile={{ size: 4 }}>
                 <Tag.Group>
                   <Tag color='white'>{getStoreIcon(item.store)}</Tag>
                   {item.aisle && (
                     <Tag
                       color='warning'
-                      size='large'
+                      size='medium'
                       className='is-unselectable'
                     >
                       {item.aisle}
