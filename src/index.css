@@ -15,3 +15,45 @@ code {
 .clickable {
   cursor: pointer;
 }
+
+/* for uppercasing the input values */
+input {
+  text-transform: uppercase;
+}
+::-webkit-input-placeholder {
+  /* WebKit browsers */
+  text-transform: none;
+}
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  text-transform: none;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  text-transform: none;
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10+ */
+  text-transform: none;
+}
+::placeholder {
+  /* Recent browsers */
+  text-transform: none;
+}
+
+/* middle store icon/aisle column*/
+.middle-column {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.middle-column svg {
+  margin: 0 auto;
+  display: block;
+}
+
+/* for the two icons in the navbar */
+.ml {
+  margin-left: auto;
+}
