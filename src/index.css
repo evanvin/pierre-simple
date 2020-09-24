@@ -52,3 +52,8 @@ input {
   margin: 0 auto;
   display: block;
 }
+
+/* for the two icons in the navbar */
+.ml {
+  margin-left: auto;
+}

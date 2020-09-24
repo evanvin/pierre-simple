@@ -4,6 +4,7 @@ import {
   faPencilAlt,
   faPlus,
   faTimes,
+  faPrint,
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faBroom, faPencilAlt, faPlus, faTimes);
+library.add(faBroom, faPencilAlt, faPlus, faTimes, faPrint);

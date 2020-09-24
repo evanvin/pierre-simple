@@ -14,6 +14,7 @@ import {
 } from 'react-bulma-components';
 const { Input, Control, Field, Label } = Form;
 
+
 class List extends React.Component {
   state = {
     itemToAdd: '',
@@ -92,11 +93,15 @@ class List extends React.Component {
   };
 
   openPrintConfirm = () => {
+    const { print } = this.props;
     this.setState({
       confirmModal: {
         show: true,
         message: 'Are you sure you want to print the list?',
-        okFn: () => {},
+        okFn: (e) => {
+          print(e);
+          this.closeConfirmModal();
+        },
         cancelFn: this.closeConfirmModal,
       },
     });
@@ -134,28 +139,30 @@ class List extends React.Component {
                 Pierre
               </Heading>
             </Navbar.Item>
-            <Navbar.Burger
+            <Navbar.Item
+              renderAs='div'
+              className='ml'
               onClick={() => {
-                this.setState({ burgerOpen: !burgerOpen });
+                this.openPrintConfirm();
               }}
-            />
+            >
+              <FontAwesomeIcon
+                icon={['fa', 'print']}
+                className='has-text-primary'
+              />
+            </Navbar.Item>
+            <Navbar.Item
+              renderAs='div'
+              onClick={() => {
+                this.openClearConfirm();
+              }}
+            >
+              <FontAwesomeIcon
+                icon={['fa', 'broom']}
+                className='has-text-primary'
+              />
+            </Navbar.Item>
           </Navbar.Brand>
-          <Navbar.Menu>
-            <Navbar.Container position='end'>
-              <Navbar.Item
-                renderAs='div'
-                className='is-pulled-right'
-                onClick={() => {
-                  this.openClearConfirm();
-                }}
-              >
-                <FontAwesomeIcon
-                  icon={['fa', 'broom']}
-                  className='has-text-primary'
-                />
-              </Navbar.Item>
-            </Navbar.Container>
-          </Navbar.Menu>
         </Navbar>
         <Panel>
           <Box>
@@ -357,7 +364,10 @@ class List extends React.Component {
                 </h3>
                 <Field className='is-grouped is-grouped-centered'>
                   <Control>
-                    <Button color='success' onClick={() => confirmModal.okFn()}>
+                    <Button
+                      color='success'
+                      onClick={(e) => confirmModal.okFn(e)}
+                    >
                       Yes
                     </Button>
                   </Control>

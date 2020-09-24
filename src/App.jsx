@@ -1,6 +1,8 @@
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 
+import axios from 'axios';
+
 import List from './components/List';
 const LS_KEY = 'pierre-list';
 
@@ -60,6 +62,15 @@ class App extends React.Component {
     this.setState({ list: [], itemNames: [] });
   };
 
+  printList = (e) => {
+    e.preventDefault();
+    axios
+      .post('https://pierre-289818.uc.r.appspot.com/publish', this.state.list)
+      .then((res) => {
+        console.log(res);
+      });
+  };
+
   componentDidMount() {
     if (localStorage.getItem(LS_KEY)) {
       const list = JSON.parse(localStorage.getItem(LS_KEY));
@@ -72,7 +83,6 @@ class App extends React.Component {
 
   render() {
     const { list, itemNames } = this.state;
-    console.log(list);
     return (
       <div>
         <List
@@ -82,6 +92,7 @@ class App extends React.Component {
           update={this.updateItem}
           remove={this.removeItem}
           clear={this.clearList}
+          print={this.printList}
         />
       </div>
     );
