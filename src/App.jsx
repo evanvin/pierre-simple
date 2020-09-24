@@ -55,6 +55,11 @@ class App extends React.Component {
     this.setState({ list, itemNames });
   };
 
+  clearList = () => {
+    localStorage.setItem(LS_KEY, JSON.stringify([]));
+    this.setState({ list: [], itemNames: [] });
+  };
+
   componentDidMount() {
     if (localStorage.getItem(LS_KEY)) {
       const list = JSON.parse(localStorage.getItem(LS_KEY));
@@ -76,6 +81,7 @@ class App extends React.Component {
           add={this.addItem}
           update={this.updateItem}
           remove={this.removeItem}
+          clear={this.clearList}
         />
       </div>
     );

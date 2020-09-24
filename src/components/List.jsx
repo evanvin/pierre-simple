@@ -23,6 +23,12 @@ class List extends React.Component {
     showUpdateModal: false,
     itemToEdit: null,
     itemToEditPrevName: '',
+    confirmModal: {
+      show: false,
+      message: '',
+      okFn: () => {},
+      cancelFn: () => {},
+    },
   };
 
   handleItemChange = (e) => {
@@ -70,6 +76,43 @@ class List extends React.Component {
     }
   };
 
+  openClearConfirm = () => {
+    const { clear } = this.props;
+    this.setState({
+      confirmModal: {
+        show: true,
+        message: 'Are you sure you want to clear the list?',
+        okFn: () => {
+          this.closeConfirmModal();
+          clear();
+        },
+        cancelFn: this.closeConfirmModal,
+      },
+    });
+  };
+
+  openPrintConfirm = () => {
+    this.setState({
+      confirmModal: {
+        show: true,
+        message: 'Are you sure you want to print the list?',
+        okFn: () => {},
+        cancelFn: this.closeConfirmModal,
+      },
+    });
+  };
+
+  closeConfirmModal = () => {
+    this.setState({
+      confirmModal: {
+        show: false,
+        message: '',
+        okFn: () => {},
+        cancelFn: () => {},
+      },
+    });
+  };
+
   render() {
     const {
       burgerOpen,
@@ -78,6 +121,7 @@ class List extends React.Component {
       itemEditRepeat,
       showUpdateModal,
       itemToEdit,
+      confirmModal,
     } = this.state;
     const { remove } = this.props;
 
@@ -98,7 +142,13 @@ class List extends React.Component {
           </Navbar.Brand>
           <Navbar.Menu>
             <Navbar.Container position='end'>
-              <Navbar.Item href='#' className='is-pulled-right'>
+              <Navbar.Item
+                renderAs='div'
+                className='is-pulled-right'
+                onClick={() => {
+                  this.openClearConfirm();
+                }}
+              >
                 <FontAwesomeIcon
                   icon={['fa', 'broom']}
                   className='has-text-primary'
@@ -290,6 +340,33 @@ class List extends React.Component {
                       }
                     >
                       Cancel
+                    </Button>
+                  </Control>
+                </Field>
+              </Box>
+            )}
+          </Modal.Content>
+        </Modal>
+
+        <Modal show={confirmModal.show} onClose={confirmModal.cancelFn}>
+          <Modal.Content>
+            {confirmModal.show && (
+              <Box style={{ margin: '3em' }}>
+                <h3 className='title is-3 has-text-centered'>
+                  {confirmModal.message}
+                </h3>
+                <Field className='is-grouped is-grouped-centered'>
+                  <Control>
+                    <Button color='success' onClick={() => confirmModal.okFn()}>
+                      Yes
+                    </Button>
+                  </Control>
+                  <Control>
+                    <Button
+                      color='danger'
+                      onClick={() => confirmModal.cancelFn()}
+                    >
+                      No
                     </Button>
                   </Control>
                 </Field>
