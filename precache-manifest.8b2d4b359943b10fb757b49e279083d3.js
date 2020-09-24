@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c6f7cfba376a7a80fbe007cf4730be83",
+    "revision": "222cc562de90d9028507a63679a4efad",
     "url": "/pierre-simple/index.html"
   },
   {
