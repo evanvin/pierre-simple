@@ -35,11 +35,17 @@ class List extends React.Component {
     this.setState({ itemToAdd: e.target.value });
   };
 
+  handleKeyPress = (e) => {
+    if (e.charCode === 13) {
+      this.addItem();
+    }
+  };
+
   addItem = () => {
     const { itemNames, add } = this.props;
     const { itemToAdd } = this.state;
 
-    if (!itemNames.includes(itemToAdd.toUpperCase())) {
+    if (!itemNames.includes(itemToAdd.toUpperCase()) && itemToAdd) {
       add(itemToAdd);
       this.setState({ itemToAdd: '', itemRepeat: '' });
     } else {
@@ -63,7 +69,10 @@ class List extends React.Component {
       (item) => item !== itemToEditPrevName
     );
 
-    if (!itemNamesNew.includes(itemToEdit.name.toUpperCase())) {
+    if (
+      !itemNamesNew.includes(itemToEdit.name.toUpperCase()) &&
+      itemToEdit.name
+    ) {
       itemToEdit.name = itemToEdit.name.toUpperCase();
       itemToEdit.aisle = itemToEdit.aisle.toUpperCase();
       update(itemToEditPrevName, itemToEdit);
@@ -129,7 +138,7 @@ class List extends React.Component {
       itemToEdit,
       confirmModal,
     } = this.state;
-    const { remove } = this.props;
+    const { remove, list } = this.props;
 
     return (
       <>
@@ -140,18 +149,20 @@ class List extends React.Component {
                 Pierre
               </Heading>
             </Navbar.Item>
-            <Navbar.Item
-              renderAs='div'
-              className='ml'
-              onClick={() => {
-                this.openPrintConfirm();
-              }}
-            >
-              <FontAwesomeIcon
-                icon={['fa', 'print']}
-                className='has-text-primary'
-              />
-            </Navbar.Item>
+            {list.length > 0 && (
+              <Navbar.Item
+                renderAs='div'
+                className='ml'
+                onClick={() => {
+                  this.openPrintConfirm();
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={['fa', 'print']}
+                  className='has-text-primary'
+                />
+              </Navbar.Item>
+            )}
             <Navbar.Item
               renderAs='div'
               onClick={() => {
@@ -170,6 +181,9 @@ class List extends React.Component {
             <Field kind='addons'>
               <Control className='is-expanded'>
                 <Input
+                  onKeyPress={(e) => {
+                    this.handleKeyPress(e);
+                  }}
                   className={itemRepeat}
                   value={itemToAdd}
                   placeholder='Add Item'
@@ -203,18 +217,12 @@ class List extends React.Component {
           </Box>
           {this.props.list.map((item) => (
             <Panel.Block key={`item-${item.name}`}>
-              <Columns.Column mobile={{ size: 5 }}>
-                {item.name}
-              </Columns.Column>
+              <Columns.Column mobile={{ size: 5 }}>{item.name}</Columns.Column>
               <Columns.Column mobile={{ size: 4 }}>
                 <Tag.Group>
                   <Tag color='white'>{getStoreIcon(item.store)}</Tag>
                   {item.aisle && (
-                    <Tag
-                      color='warning'
-                      size='medium'
-                      className='is-unselectable'
-                    >
+                    <Tag color='warning' className='is-unselectable'>
                       {item.aisle}
                     </Tag>
                   )}
@@ -222,11 +230,11 @@ class List extends React.Component {
               </Columns.Column>
               <Columns.Column mobile={{ size: 3 }}>
                 <Tag.Group gapless className='is-pulled-right'>
-                  <Tag color='info' size='large' className='is-unselectable'>
+                  <Tag color='info' size='medium' className='is-unselectable'>
                     {item.qty}
                   </Tag>
                   <Tag
-                    size='large'
+                    size='medium'
                     color='danger'
                     rounded
                     onClick={() => {
@@ -239,7 +247,7 @@ class List extends React.Component {
                     />
                   </Tag>
                   <Tag
-                    size='large'
+                    size='medium'
                     color='dark'
                     rounded
                     onClick={() => {
