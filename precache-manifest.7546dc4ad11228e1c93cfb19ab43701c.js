@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "222cc562de90d9028507a63679a4efad",
+    "revision": "fe57783cd98c044942133fea13a6b8de",
     "url": "/pierre-simple/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pierre-simple/static/css/2.0111e717.chunk.css"
   },
   {
-    "revision": "a1951fc6e9ae674d48fe",
+    "revision": "5f1716fdede4c7a7e5b8",
     "url": "/pierre-simple/static/css/main.6525596a.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pierre-simple/static/js/2.507e0658.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a1951fc6e9ae674d48fe",
-    "url": "/pierre-simple/static/js/main.d4a94f7c.chunk.js"
+    "revision": "5f1716fdede4c7a7e5b8",
+    "url": "/pierre-simple/static/js/main.a9cd4339.chunk.js"
   },
   {
     "revision": "e8ee0e6323fff15160e0",
@@ -36,11 +36,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pierre-simple/static/media/other.52bcb59b.svg"
   },
   {
-    "revision": "93c22d01c40e3adec20869daea42c9ab",
-    "url": "/pierre-simple/static/media/safeway.93c22d01.svg"
+    "revision": "aac20ce94d021dbc913ee0a60ab3b78f",
+    "url": "/pierre-simple/static/media/safeway.aac20ce9.svg"
   },
   {
-    "revision": "b228cfc5e72450235e40dae0cf18afab",
-    "url": "/pierre-simple/static/media/walmart.b228cfc5.svg"
+    "revision": "6c8f85d7aa090a7cbf2470ea54ba7c7a",
+    "url": "/pierre-simple/static/media/walmart.6c8f85d7.svg"
   }
 ]);
