@@ -6,7 +6,7 @@ import React from 'react';
 import { forEach as FOREACH, orderBy as ORDERBY } from 'lodash';
 
 export const getStoreIcon = (store) => {
-  const HW = 40;
+  const HW = 35;
   switch (store) {
     case 'Aldi':
       return <Aldi height={HW} width={HW} />;
