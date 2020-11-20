@@ -17,19 +17,18 @@ class App extends React.Component {
 
   addItem = (itemName) => {
     const { list, itemNames } = this.state;
-    const item = {
-      name: itemName.toUpperCase(),
-      aisle: 'OTHER',
-      store: 'Other',
-      qty: 1,
-    };
-    list.push(item);
-
-    this.sortList(list);
-    itemNames.push(itemName.toUpperCase());
-    itemNames.sort();
     axios.post(`${BASE_URL}/add`, item).then((res) => {
-      console.log(res);
+      const item = {
+        id: res.data,
+        name: itemName.toUpperCase(),
+        aisle: 'OTHER',
+        store: 'Other',
+        qty: 1,
+      };
+      list.push(item);
+      this.sortList(list);
+      itemNames.push(itemName.toUpperCase());
+      itemNames.sort();
       this.setState({ list, itemNames });
     });
   };
@@ -65,7 +64,6 @@ class App extends React.Component {
     list.splice(idx1, 1);
     const idx2 = itemNames.findIndex((i) => i === item.name);
     itemNames.splice(idx2, 1);
-
     axios.delete(`${BASE_URL}/delete/${item['id']}`).then((res) => {
       console.log(res);
       this.setState({ list, itemNames });
