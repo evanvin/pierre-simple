@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/pierre-simple/precache-manifest.a9be0ecdbcfe09ee356cd0ecb759b607.js"
+  "/pierre-simple/precache-manifest.2ad7e72917d5510815fcd60d01f040e6.js"
 );
 
 self.addEventListener('message', (event) => {
