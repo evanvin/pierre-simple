@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/pierre-simple/static/css/main.6525596a.chunk.css",
-    "main.js": "/pierre-simple/static/js/main.a9cd4339.chunk.js",
-    "main.js.map": "/pierre-simple/static/js/main.a9cd4339.chunk.js.map",
+    "main.js": "/pierre-simple/static/js/main.ea471c16.chunk.js",
+    "main.js.map": "/pierre-simple/static/js/main.ea471c16.chunk.js.map",
     "runtime-main.js": "/pierre-simple/static/js/runtime-main.42a0344c.js",
     "runtime-main.js.map": "/pierre-simple/static/js/runtime-main.42a0344c.js.map",
     "static/css/2.0111e717.chunk.css": "/pierre-simple/static/css/2.0111e717.chunk.css",
-    "static/js/2.507e0658.chunk.js": "/pierre-simple/static/js/2.507e0658.chunk.js",
-    "static/js/2.507e0658.chunk.js.map": "/pierre-simple/static/js/2.507e0658.chunk.js.map",
+    "static/js/2.8608a74b.chunk.js": "/pierre-simple/static/js/2.8608a74b.chunk.js",
+    "static/js/2.8608a74b.chunk.js.map": "/pierre-simple/static/js/2.8608a74b.chunk.js.map",
     "index.html": "/pierre-simple/index.html",
-    "precache-manifest.7546dc4ad11228e1c93cfb19ab43701c.js": "/pierre-simple/precache-manifest.7546dc4ad11228e1c93cfb19ab43701c.js",
+    "precache-manifest.a9be0ecdbcfe09ee356cd0ecb759b607.js": "/pierre-simple/precache-manifest.a9be0ecdbcfe09ee356cd0ecb759b607.js",
     "service-worker.js": "/pierre-simple/service-worker.js",
     "static/css/2.0111e717.chunk.css.map": "/pierre-simple/static/css/2.0111e717.chunk.css.map",
     "static/css/main.6525596a.chunk.css.map": "/pierre-simple/static/css/main.6525596a.chunk.css.map",
-    "static/js/2.507e0658.chunk.js.LICENSE.txt": "/pierre-simple/static/js/2.507e0658.chunk.js.LICENSE.txt",
+    "static/js/2.8608a74b.chunk.js.LICENSE.txt": "/pierre-simple/static/js/2.8608a74b.chunk.js.LICENSE.txt",
     "static/media/aldi.25328789.svg": "/pierre-simple/static/media/aldi.25328789.svg",
     "static/media/other.52bcb59b.svg": "/pierre-simple/static/media/other.52bcb59b.svg",
     "static/media/safeway.aac20ce9.svg": "/pierre-simple/static/media/safeway.aac20ce9.svg",
@@ -22,8 +22,8 @@
   "entrypoints": [
     "static/js/runtime-main.42a0344c.js",
     "static/css/2.0111e717.chunk.css",
-    "static/js/2.507e0658.chunk.js",
+    "static/js/2.8608a74b.chunk.js",
     "static/css/main.6525596a.chunk.css",
-    "static/js/main.a9cd4339.chunk.js"
+    "static/js/main.ea471c16.chunk.js"
   ]
 }
