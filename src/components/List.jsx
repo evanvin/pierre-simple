@@ -75,6 +75,7 @@ class List extends React.Component {
     ) {
       itemToEdit.name = itemToEdit.name.toUpperCase();
       itemToEdit.aisle = itemToEdit.aisle.toUpperCase();
+      itemToEdit.qty = parseInt(itemToEdit.qty);
       update(itemToEditPrevName, itemToEdit);
       this.setState({
         itemToEditPrevName: '',
