@@ -17,14 +17,15 @@ class App extends React.Component {
 
   addItem = (itemName) => {
     const { list, itemNames } = this.state;
+    const item = {
+      name: itemName.toUpperCase(),
+      aisle: 'OTHER',
+      store: 'Other',
+      qty: 1,
+    };
+
     axios.post(`${BASE_URL}/add`, item).then((res) => {
-      const item = {
-        id: res.data,
-        name: itemName.toUpperCase(),
-        aisle: 'OTHER',
-        store: 'Other',
-        qty: 1,
-      };
+      item['id'] = res;
       list.push(item);
       this.sortList(list);
       itemNames.push(itemName.toUpperCase());
