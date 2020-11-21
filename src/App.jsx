@@ -25,7 +25,7 @@ class App extends React.Component {
     };
 
     axios.post(`${BASE_URL}/add`, item).then((res) => {
-      item['id'] = res;
+      item['id'] = res.data;
       list.push(item);
       this.sortList(list);
       itemNames.push(itemName.toUpperCase());
