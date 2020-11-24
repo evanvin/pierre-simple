@@ -1,15 +1,14 @@
-import { getStoreIcon } from '../utils/utils';
+import { STORES } from '../utils/utils';
 import React from 'react';
+import _ from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   Panel,
   Form,
   Button,
-  Tag,
   Box,
   Navbar,
   Heading,
-  Columns,
   Modal,
 } from 'react-bulma-components';
 const { Input, Control, Field, Label } = Form;
@@ -141,6 +140,9 @@ class List extends React.Component {
     } = this.state;
     const { remove, list } = this.props;
 
+    const grouped_list = _.groupBy(list, 'store');
+    const group_names = _.uniq(_.map(list, 'store')).sort();
+
     return (
       <>
         <Navbar color='dark' fixed='top' active={burgerOpen}>
@@ -207,7 +209,7 @@ class List extends React.Component {
               <Control>
                 <Button renderAs='button'>
                   <FontAwesomeIcon
-                    icon={['fa', 'times']}
+                    icon={['fa', 'ban']}
                     onClick={() => {
                       this.setState({ itemToAdd: '' });
                     }}
@@ -216,54 +218,100 @@ class List extends React.Component {
               </Control>
             </Field>
           </Box>
-          {this.props.list.map((item) => (
-            <Panel.Block key={`item-${item.name}`}>
-              <Columns.Column mobile={{ size: 5 }}>{item.name}</Columns.Column>
-              <Columns.Column mobile={{ size: 4 }}>
-                <Tag.Group>
-                  <Tag color='white'>{getStoreIcon(item.store)}</Tag>
-                  {item.aisle && (
-                    <Tag color='warning' className='is-unselectable'>
-                      {item.aisle}
-                    </Tag>
-                  )}
-                </Tag.Group>
-              </Columns.Column>
-              <Columns.Column mobile={{ size: 3 }}>
-                <Tag.Group gapless className='is-pulled-right'>
-                  <Tag color='info' size='medium' className='is-unselectable'>
-                    {item.qty}
-                  </Tag>
-                  <Tag
-                    size='medium'
-                    color='danger'
-                    rounded
-                    onClick={() => {
-                      remove(item);
-                    }}
-                  >
-                    <FontAwesomeIcon
-                      icon={['fa', 'times']}
-                      className='clickable'
-                    />
-                  </Tag>
-                  <Tag
-                    size='medium'
-                    color='dark'
-                    rounded
-                    onClick={() => {
-                      this.openUpdateModal(item);
-                    }}
-                  >
-                    <FontAwesomeIcon
-                      icon={['fa', 'pencil-alt']}
-                      className='clickable'
-                    />
-                  </Tag>
-                </Tag.Group>
-              </Columns.Column>
-            </Panel.Block>
-          ))}
+
+          <div className='store-panels'>
+            <div className='columns is-multiline'>
+              {group_names.map((group) => (
+                <div
+                  className='column store-panel is-4'
+                  key={`Store-Panel-${group}`}
+                >
+                  <div className='panel'>
+                    <p className='panel-heading'>
+                      <span className='store-panel-header-item'>
+                        {STORES[group]}
+                      </span>
+                      <span className='store-panel-header-item ml-3'>
+                        {group}
+                      </span>
+                    </p>
+
+                    {grouped_list[group].map((item) => (
+                      <div
+                        className='panel-block'
+                        key={`Ptore-Panel-Block-${item.name}`}
+                      >
+                        <span className='panel-icon'>{item.qty}</span>
+                        {item.name}
+
+                        <span className='store-panel-icons'>
+                          {item.aisle !== 'OTHER' && (
+                            <FontAwesomeIcon
+                              color='#f7dd57'
+                              icon={['fa', 'tag']}
+                              className='clickable'
+                            />
+                          )}
+                          <div class='dropdown is-hoverable'>
+                            <div class='dropdown-trigger'>
+                              <FontAwesomeIcon
+                                icon={['fa', 'bars']}
+                                className='clickable'
+                              />
+                            </div>
+                            <div
+                              class='dropdown-menu'
+                              id='dropdown-menu'
+                              role='menu'
+                            >
+                              <div class='dropdown-content'>
+                                <div
+                                  class='dropdown-item'
+                                  onClick={() => {
+                                    this.openUpdateModal(item);
+                                  }}
+                                >
+                                  Move
+                                  <FontAwesomeIcon
+                                    icon={['fa', 'exchange-alt']}
+                                    className='clickable is-pulled-right'
+                                  />
+                                </div>
+                                <div
+                                  class='dropdown-item'
+                                  onClick={() => {
+                                    this.openUpdateModal(item);
+                                  }}
+                                >
+                                  Edit
+                                  <FontAwesomeIcon
+                                    icon={['fa', 'wrench']}
+                                    className='clickable is-pulled-right'
+                                  />
+                                </div>
+                                <div
+                                  class='dropdown-item'
+                                  onClick={() => {
+                                    remove(item);
+                                  }}
+                                >
+                                  Remove
+                                  <FontAwesomeIcon
+                                    icon={['fa', 'trash-alt']}
+                                    className='clickable is-pulled-right'
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </Panel>
         <Modal
           show={showUpdateModal}
@@ -318,10 +366,11 @@ class List extends React.Component {
                           this.setState({ itemToEdit });
                         }}
                       >
-                        <option value={''}>Other</option>
-                        <option value={'Aldi'}>Aldi</option>
-                        <option value={'Safeway'}>Safeway</option>
-                        <option value={'Walmart'}>Walmart</option>
+                        {Object.keys(STORES).map((key) => (
+                          <option key={`Store-Option-${key}`} value={key}>
+                            {key}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </Control>

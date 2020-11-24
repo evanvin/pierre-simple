@@ -57,3 +57,27 @@ input {
 .ml {
   margin-left: auto;
 }
+
+.ml-3 {
+  margin-left: 0.75em;
+}
+
+.store-panels {
+  margin: 0px 50px;
+}
+
+.store-panel-header-item {
+  vertical-align: middle;
+}
+
+.column.store-panel > .panel {
+  height: 100%;
+}
+
+.store-panel-icons {
+  margin-left: auto;
+}
+
+.store-panel-icons  svg{
+  margin-left: 20px;
+}

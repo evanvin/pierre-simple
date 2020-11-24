@@ -3,8 +3,24 @@ import {
   faBroom,
   faPencilAlt,
   faPlus,
-  faTimes,
   faPrint,
+  faTrashAlt,
+  faExchangeAlt,
+  faWrench,
+  faBars,
+  faBan,
+  faTag,
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faBroom, faPencilAlt, faPlus, faTimes, faPrint);
+library.add(
+  faBroom,
+  faBan,
+  faBars,
+  faPencilAlt,
+  faPlus,
+  faTrashAlt,
+  faExchangeAlt,
+  faTag,
+  faPrint,
+  faWrench
+);

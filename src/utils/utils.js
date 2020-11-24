@@ -2,21 +2,32 @@ import { ReactComponent as Safeway } from '../assets/safeway.svg';
 import { ReactComponent as Aldi } from '../assets/aldi.svg';
 import { ReactComponent as Walmart } from '../assets/walmart.svg';
 import { ReactComponent as Other } from '../assets/other.svg';
+import { ReactComponent as Goodwill } from '../assets/goodwill.svg';
+import { ReactComponent as HomeDepot } from '../assets/homedepot.svg';
+import { ReactComponent as HobbyLobby } from '../assets/hobbylobby.svg';
+import { ReactComponent as HomeGoods } from '../assets/homegoods.svg';
+import { ReactComponent as Latelas } from '../assets/latelas.svg';
+import { ReactComponent as UPS } from '../assets/ups.svg';
 import React from 'react';
 import { forEach as FOREACH, orderBy as ORDERBY } from 'lodash';
 
-export const getStoreIcon = (store) => {
-  const HW = 35;
-  switch (store) {
-    case 'Aldi':
-      return <Aldi height={HW} width={HW} />;
-    case 'Safeway':
-      return <Safeway height={HW} width={HW} />;
-    case 'Walmart':
-      return <Walmart height={HW} width={HW} />;
-    default:
-      return <Other height={HW} width={HW} />;
-  }
+const HW = 35;
+
+const icon = (ICON) => {
+  return <ICON height={HW} width={HW} />;
+};
+
+export const STORES = {
+  Other: icon(Other),
+  Aldi: icon(Aldi),
+  Goodwill: icon(Goodwill),
+  'Hobby Lobby': icon(HobbyLobby),
+  'Home Depot': icon(HomeDepot),
+  HomeGoods: icon(HomeGoods),
+  "Latela's": icon(Latelas),
+  Safeway: icon(Safeway),
+  UPS: icon(UPS),
+  Walmart: icon(Walmart),
 };
 
 export const formatList = (items) => {
