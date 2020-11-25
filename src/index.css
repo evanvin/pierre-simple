@@ -78,6 +78,10 @@ input {
   margin-left: auto;
 }
 
-.store-panel-icons  svg{
+.store-panel-icons svg {
   margin-left: 20px;
+}
+
+.no-margin {
+  margin: 0px !important;
 }

@@ -81,6 +81,18 @@ class App extends React.Component {
     });
   };
 
+  dragStoreEnd = (end) => {
+    const { list } = this.state;
+    const idx = list.findIndex((i) => i.id === end.draggableId);
+    let item = list[idx];
+    item.store = end.destination.droppableId;
+    axios.patch(`${BASE_URL}/update`, item).then((res) => {
+      console.log(res);
+      list[idx] = item;
+      this.setState({ list });
+    });
+  };
+
   printList = (e) => {
     e.preventDefault();
     axios
@@ -108,6 +120,7 @@ class App extends React.Component {
           remove={this.removeItem}
           clear={this.clearList}
           print={this.printList}
+          dragStoreEnd={this.dragStoreEnd}
         />
       </div>
     );

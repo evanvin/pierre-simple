@@ -10,6 +10,7 @@ import {
   faBars,
   faBan,
   faTag,
+  faLayerGroup,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -22,5 +23,7 @@ library.add(
   faExchangeAlt,
   faTag,
   faPrint,
-  faWrench
+  faWrench,
+  faBan,
+  faLayerGroup
 );

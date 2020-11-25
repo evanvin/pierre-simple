@@ -11,6 +11,7 @@ import {
   Heading,
   Modal,
 } from 'react-bulma-components';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 const { Input, Control, Field, Label } = Form;
 
 class List extends React.Component {
@@ -21,6 +22,7 @@ class List extends React.Component {
     burgerOpen: false,
     showUpdateModal: false,
     itemToEdit: null,
+    inlineQtyItem: null,
     itemToEditPrevName: '',
     confirmModal: {
       show: false,
@@ -138,7 +140,7 @@ class List extends React.Component {
       itemToEdit,
       confirmModal,
     } = this.state;
-    const { remove, list } = this.props;
+    const { remove, list, dragStoreEnd } = this.props;
 
     const grouped_list = _.groupBy(list, 'store');
     const group_names = _.uniq(_.map(list, 'store')).sort();
@@ -179,140 +181,157 @@ class List extends React.Component {
             </Navbar.Item>
           </Navbar.Brand>
         </Navbar>
-        <Panel>
-          <Box>
-            <Field kind='addons'>
-              <Control className='is-expanded'>
-                <Input
-                  onKeyPress={(e) => {
-                    this.handleKeyPress(e);
-                  }}
-                  className={itemRepeat}
-                  value={itemToAdd}
-                  placeholder='Add Item'
-                  type='text'
-                  onChange={(e) => {
-                    this.handleItemChange(e);
-                  }}
-                />
-              </Control>
-              <Control>
-                <Button
-                  renderAs='button'
-                  onClick={() => {
-                    this.addItem();
-                  }}
-                >
-                  <FontAwesomeIcon icon={['fa', 'plus']} />
-                </Button>
-              </Control>
-              <Control>
-                <Button renderAs='button'>
-                  <FontAwesomeIcon
-                    icon={['fa', 'ban']}
-                    onClick={() => {
-                      this.setState({ itemToAdd: '' });
+        <DragDropContext
+          onDragEnd={(e) => {
+            dragStoreEnd(e);
+          }}
+        >
+          <Panel>
+            <Box>
+              <Field kind='addons'>
+                <Control className='is-expanded'>
+                  <Input
+                    onKeyPress={(e) => {
+                      this.handleKeyPress(e);
+                    }}
+                    className={itemRepeat}
+                    value={itemToAdd}
+                    placeholder='Add Item'
+                    type='text'
+                    onChange={(e) => {
+                      this.handleItemChange(e);
                     }}
                   />
-                </Button>
-              </Control>
-            </Field>
-          </Box>
+                </Control>
+                <Control>
+                  <Button
+                    renderAs='button'
+                    onClick={() => {
+                      this.addItem();
+                    }}
+                  >
+                    <FontAwesomeIcon icon={['fa', 'plus']} />
+                  </Button>
+                </Control>
+                <Control>
+                  <Button renderAs='button'>
+                    <FontAwesomeIcon
+                      icon={['fa', 'ban']}
+                      onClick={() => {
+                        this.setState({ itemToAdd: '' });
+                      }}
+                    />
+                  </Button>
+                </Control>
+              </Field>
+            </Box>
 
-          <div className='store-panels'>
-            <div className='columns is-multiline'>
-              {group_names.map((group) => (
-                <div
-                  className='column store-panel is-4'
-                  key={`Store-Panel-${group}`}
-                >
-                  <div className='panel'>
-                    <p className='panel-heading'>
-                      <span className='store-panel-header-item'>
-                        {STORES[group]}
-                      </span>
-                      <span className='store-panel-header-item ml-3'>
-                        {group}
-                      </span>
-                    </p>
-
-                    {grouped_list[group].map((item) => (
+            <div className='store-panels'>
+              <div className='columns is-multiline'>
+                {group_names.map((group) => (
+                  <Droppable
+                    key={`DROPPABLE-TOP-${group}`}
+                    droppableId={group}
+                    type='STORE'
+                  >
+                    {(provDrop, snapDrop) => (
                       <div
-                        className='panel-block'
-                        key={`Ptore-Panel-Block-${item.name}`}
+                        ref={provDrop.innerRef}
+                        {...provDrop.droppableProps}
+                        className='column store-panel is-4'
+                        key={`Store-Panel-${group}`}
                       >
-                        <span className='panel-icon'>{item.qty}</span>
-                        {item.name}
+                        <div className='panel'>
+                          <p className='panel-heading'>
+                            <span className='store-panel-header-item'>
+                              {STORES[group]}
+                            </span>
+                            <span className='store-panel-header-item ml-3'>
+                              {group}
+                            </span>
+                          </p>
 
-                        <span className='store-panel-icons'>
-                          {item.aisle !== 'OTHER' && (
-                            <FontAwesomeIcon
-                              color='#f7dd57'
-                              icon={['fa', 'tag']}
-                              className='clickable'
-                            />
-                          )}
-                          <div class='dropdown is-hoverable'>
-                            <div class='dropdown-trigger'>
-                              <FontAwesomeIcon
-                                icon={['fa', 'bars']}
-                                className='clickable'
-                              />
-                            </div>
-                            <div
-                              class='dropdown-menu'
-                              id='dropdown-menu'
-                              role='menu'
+                          {grouped_list[group].map((item, idx) => (
+                            <Draggable
+                              key={`DRAGGABLE-TOP-${item.name}`}
+                              draggableId={item.id}
+                              index={idx}
                             >
-                              <div class='dropdown-content'>
+                              {(provDrag, snapDrag) => (
                                 <div
-                                  class='dropdown-item'
-                                  onClick={() => {
-                                    this.openUpdateModal(item);
-                                  }}
+                                  ref={provDrag.innerRef}
+                                  {...provDrag.draggableProps}
+                                  {...provDrag.dragHandleProps}
+                                  className='panel-block'
+                                  key={`Ptore-Panel-Block-${item.name}`}
                                 >
-                                  Move
-                                  <FontAwesomeIcon
-                                    icon={['fa', 'exchange-alt']}
-                                    className='clickable is-pulled-right'
-                                  />
+                                  <span className='panel-icon'>{item.qty}</span>
+                                  {item.name}
+
+                                  <span className='store-panel-icons'>
+                                    {item.aisle !== 'OTHER' && (
+                                      <FontAwesomeIcon
+                                        color='#f7dd57'
+                                        icon={['fa', 'tag']}
+                                        className='clickable'
+                                      />
+                                    )}
+                                    <div className='dropdown is-right is-hoverable'>
+                                      <div className='dropdown-trigger'>
+                                        <FontAwesomeIcon
+                                          icon={['fa', 'bars']}
+                                          className='clickable'
+                                        />
+                                      </div>
+                                      <div
+                                        className='dropdown-menu'
+                                        id='dropdown-menu'
+                                        role='menu'
+                                      >
+                                        <div className='dropdown-content'>
+                                          <div
+                                            className='dropdown-item'
+                                            onClick={() => {
+                                              this.openUpdateModal(item);
+                                            }}
+                                          >
+                                            Edit
+                                            <FontAwesomeIcon
+                                              icon={['fa', 'wrench']}
+                                              className='clickable is-pulled-right'
+                                            />
+                                          </div>
+                                          <div
+                                            className='dropdown-item'
+                                            onClick={() => {
+                                              remove(item);
+                                            }}
+                                          >
+                                            Remove
+                                            <FontAwesomeIcon
+                                              icon={['fa', 'trash-alt']}
+                                              className='clickable is-pulled-right'
+                                            />
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </span>
+                                  {provDrag.placeholder}
                                 </div>
-                                <div
-                                  class='dropdown-item'
-                                  onClick={() => {
-                                    this.openUpdateModal(item);
-                                  }}
-                                >
-                                  Edit
-                                  <FontAwesomeIcon
-                                    icon={['fa', 'wrench']}
-                                    className='clickable is-pulled-right'
-                                  />
-                                </div>
-                                <div
-                                  class='dropdown-item'
-                                  onClick={() => {
-                                    remove(item);
-                                  }}
-                                >
-                                  Remove
-                                  <FontAwesomeIcon
-                                    icon={['fa', 'trash-alt']}
-                                    className='clickable is-pulled-right'
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </span>
+                              )}
+                            </Draggable>
+                          ))}
+                        </div>
+                        {provDrop.placeholder}
                       </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
+                    )}
+                  </Droppable>
+                ))}
+              </div>
             </div>
-          </div>
-        </Panel>
+          </Panel>
+        </DragDropContext>
         <Modal
           show={showUpdateModal}
           onClose={() =>
