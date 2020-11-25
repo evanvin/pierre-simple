@@ -145,6 +145,12 @@ class List extends React.Component {
     const grouped_list = _.groupBy(list, 'store');
     const group_names = _.uniq(_.map(list, 'store')).sort();
 
+    _.forEach(STORES, (v, k) => {
+      if (!group_names.includes(k)) {
+        group_names.push(k);
+      }
+    });
+
     return (
       <>
         <Navbar color='dark' fixed='top' active={burgerOpen}>
@@ -251,77 +257,80 @@ class List extends React.Component {
                             </span>
                           </p>
 
-                          {grouped_list[group].map((item, idx) => (
-                            <Draggable
-                              key={`DRAGGABLE-TOP-${item.name}`}
-                              draggableId={item.id}
-                              index={idx}
-                            >
-                              {(provDrag, snapDrag) => (
-                                <div
-                                  ref={provDrag.innerRef}
-                                  {...provDrag.draggableProps}
-                                  {...provDrag.dragHandleProps}
-                                  className='panel-block'
-                                  key={`Ptore-Panel-Block-${item.name}`}
-                                >
-                                  <span className='panel-icon'>{item.qty}</span>
-                                  {item.name}
+                          {grouped_list[group] &&
+                            grouped_list[group].map((item, idx) => (
+                              <Draggable
+                                key={`DRAGGABLE-TOP-${item.name}`}
+                                draggableId={item.id}
+                                index={idx}
+                              >
+                                {(provDrag, snapDrag) => (
+                                  <div
+                                    ref={provDrag.innerRef}
+                                    {...provDrag.draggableProps}
+                                    {...provDrag.dragHandleProps}
+                                    className='panel-block'
+                                    key={`Ptore-Panel-Block-${item.name}`}
+                                  >
+                                    <span className='panel-icon'>
+                                      {item.qty}
+                                    </span>
+                                    {item.name}
 
-                                  <span className='store-panel-icons'>
-                                    {item.aisle !== 'OTHER' && (
-                                      <FontAwesomeIcon
-                                        color='#f7dd57'
-                                        icon={['fa', 'tag']}
-                                        className='clickable'
-                                      />
-                                    )}
-                                    <div className='dropdown is-right is-hoverable'>
-                                      <div className='dropdown-trigger'>
+                                    <span className='store-panel-icons'>
+                                      {item.aisle !== 'OTHER' && (
                                         <FontAwesomeIcon
-                                          icon={['fa', 'bars']}
+                                          color='#f7dd57'
+                                          icon={['fa', 'tag']}
                                           className='clickable'
                                         />
-                                      </div>
-                                      <div
-                                        className='dropdown-menu'
-                                        id='dropdown-menu'
-                                        role='menu'
-                                      >
-                                        <div className='dropdown-content'>
-                                          <div
-                                            className='dropdown-item'
-                                            onClick={() => {
-                                              this.openUpdateModal(item);
-                                            }}
-                                          >
-                                            Edit
-                                            <FontAwesomeIcon
-                                              icon={['fa', 'wrench']}
-                                              className='clickable is-pulled-right'
-                                            />
-                                          </div>
-                                          <div
-                                            className='dropdown-item'
-                                            onClick={() => {
-                                              remove(item);
-                                            }}
-                                          >
-                                            Remove
-                                            <FontAwesomeIcon
-                                              icon={['fa', 'trash-alt']}
-                                              className='clickable is-pulled-right'
-                                            />
+                                      )}
+                                      <div className='dropdown is-right is-hoverable'>
+                                        <div className='dropdown-trigger'>
+                                          <FontAwesomeIcon
+                                            icon={['fa', 'bars']}
+                                            className='clickable'
+                                          />
+                                        </div>
+                                        <div
+                                          className='dropdown-menu'
+                                          id='dropdown-menu'
+                                          role='menu'
+                                        >
+                                          <div className='dropdown-content'>
+                                            <div
+                                              className='dropdown-item'
+                                              onClick={() => {
+                                                this.openUpdateModal(item);
+                                              }}
+                                            >
+                                              Edit
+                                              <FontAwesomeIcon
+                                                icon={['fa', 'wrench']}
+                                                className='clickable is-pulled-right'
+                                              />
+                                            </div>
+                                            <div
+                                              className='dropdown-item'
+                                              onClick={() => {
+                                                remove(item);
+                                              }}
+                                            >
+                                              Remove
+                                              <FontAwesomeIcon
+                                                icon={['fa', 'trash-alt']}
+                                                className='clickable is-pulled-right'
+                                              />
+                                            </div>
                                           </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  </span>
-                                  {provDrag.placeholder}
-                                </div>
-                              )}
-                            </Draggable>
-                          ))}
+                                    </span>
+                                    {provDrag.placeholder}
+                                  </div>
+                                )}
+                              </Draggable>
+                            ))}
                         </div>
                         {provDrop.placeholder}
                       </div>
@@ -345,68 +354,56 @@ class List extends React.Component {
           <Modal.Content>
             {itemToEdit && (
               <Box style={{ margin: '3em' }}>
-                <Field>
-                  <Label>Item Name</Label>
-                  <Control>
-                    <Input
-                      className={itemEditRepeat}
-                      placeholder='Item Name'
-                      value={itemToEdit.name}
-                      onChange={(e) => {
-                        itemToEdit.name = e.target.value;
-                        this.setState({ itemToEdit });
-                      }}
-                    />
-                  </Control>
-                </Field>
+                <div className='columns is-multiline'>
+                  <div className='column is-4'>
+                    <Field>
+                      <Label>Item Name</Label>
+                      <Control>
+                        <Input
+                          className={itemEditRepeat}
+                          placeholder='Item Name'
+                          value={itemToEdit.name}
+                          onChange={(e) => {
+                            itemToEdit.name = e.target.value;
+                            this.setState({ itemToEdit });
+                          }}
+                        />
+                      </Control>
+                    </Field>
+                  </div>
+                  <div className='column is-4'>
+                    <Field>
+                      <Label>Quantity</Label>
+                      <Control>
+                        <Input
+                          min={1}
+                          type='number'
+                          value={itemToEdit.qty}
+                          onChange={(e) => {
+                            itemToEdit.qty = e.target.value;
+                            this.setState({ itemToEdit });
+                          }}
+                        />
+                      </Control>
+                    </Field>
+                  </div>
+                  <div className='column is-4'>
+                    <Field>
+                      <Label>Aisle</Label>
+                      <Control>
+                        <Input
+                          placeholder='Aisle'
+                          value={itemToEdit.aisle}
+                          onChange={(e) => {
+                            itemToEdit.aisle = e.target.value;
+                            this.setState({ itemToEdit });
+                          }}
+                        />
+                      </Control>
+                    </Field>
+                  </div>
+                </div>
 
-                <Field>
-                  <Label>Quantity</Label>
-                  <Control>
-                    <Input
-                      min={1}
-                      type='number'
-                      value={itemToEdit.qty}
-                      onChange={(e) => {
-                        itemToEdit.qty = e.target.value;
-                        this.setState({ itemToEdit });
-                      }}
-                    />
-                  </Control>
-                </Field>
-                <Field>
-                  <Label>Store</Label>
-                  <Control className='is-expanded'>
-                    <div className='select is-fullwidth'>
-                      <select
-                        value={itemToEdit.store}
-                        onChange={(e) => {
-                          itemToEdit.store = e.target.value;
-                          this.setState({ itemToEdit });
-                        }}
-                      >
-                        {Object.keys(STORES).map((key) => (
-                          <option key={`Store-Option-${key}`} value={key}>
-                            {key}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </Control>
-                </Field>
-                <Field>
-                  <Label>Aisle</Label>
-                  <Control>
-                    <Input
-                      placeholder='Aisle'
-                      value={itemToEdit.aisle}
-                      onChange={(e) => {
-                        itemToEdit.aisle = e.target.value;
-                        this.setState({ itemToEdit });
-                      }}
-                    />
-                  </Control>
-                </Field>
                 <Field className='is-grouped is-grouped-centered'>
                   <Control>
                     <Button color='success' onClick={() => this.updateItem()}>

@@ -8,6 +8,7 @@ import { ReactComponent as HobbyLobby } from '../assets/hobbylobby.svg';
 import { ReactComponent as HomeGoods } from '../assets/homegoods.svg';
 import { ReactComponent as Latelas } from '../assets/latelas.svg';
 import { ReactComponent as UPS } from '../assets/ups.svg';
+import { ReactComponent as Amazon } from '../assets/amazon.svg';
 import React from 'react';
 import { forEach as FOREACH, orderBy as ORDERBY } from 'lodash';
 
@@ -18,13 +19,14 @@ const icon = (ICON) => {
 };
 
 export const STORES = {
-  Other: icon(Other),
   Aldi: icon(Aldi),
+  Amazon: icon(Amazon),
   Goodwill: icon(Goodwill),
   'Hobby Lobby': icon(HobbyLobby),
   'Home Depot': icon(HomeDepot),
   HomeGoods: icon(HomeGoods),
   "Latela's": icon(Latelas),
+  Other: icon(Other),
   Safeway: icon(Safeway),
   UPS: icon(UPS),
   Walmart: icon(Walmart),
