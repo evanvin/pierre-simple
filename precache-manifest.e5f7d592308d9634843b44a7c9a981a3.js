@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1157d3796ddecc210e2e820f95e7e67d",
+    "revision": "1b8b0f88e642c2cdc192e67c2b4cf2fc",
     "url": "/pierre-simple/index.html"
   },
   {
-    "revision": "e06cf6a10a3e33e90b72",
+    "revision": "c7e371a1478ee59e7ac1",
     "url": "/pierre-simple/static/css/2.0111e717.chunk.css"
   },
   {
-    "revision": "cdcf0b04b790f197f104",
-    "url": "/pierre-simple/static/css/main.34294b0f.chunk.css"
+    "revision": "b44108b8baa7413a6019",
+    "url": "/pierre-simple/static/css/main.b8f6fa89.chunk.css"
   },
   {
-    "revision": "e06cf6a10a3e33e90b72",
-    "url": "/pierre-simple/static/js/2.c17760d8.chunk.js"
+    "revision": "c7e371a1478ee59e7ac1",
+    "url": "/pierre-simple/static/js/2.507ab822.chunk.js"
   },
   {
-    "revision": "c01b86986aa5d08b3490d189378c4302",
-    "url": "/pierre-simple/static/js/2.c17760d8.chunk.js.LICENSE.txt"
+    "revision": "0f42463c5b44c89c5d740b8390350b83",
+    "url": "/pierre-simple/static/js/2.507ab822.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "cdcf0b04b790f197f104",
-    "url": "/pierre-simple/static/js/main.82374c27.chunk.js"
+    "revision": "b44108b8baa7413a6019",
+    "url": "/pierre-simple/static/js/main.401bce7a.chunk.js"
   },
   {
     "revision": "e8ee0e6323fff15160e0",
@@ -30,6 +30,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "25328789c830806a3bce087970acd325",
     "url": "/pierre-simple/static/media/aldi.25328789.svg"
+  },
+  {
+    "revision": "e6040a6b7cc4a526ac80e52dd19165ca",
+    "url": "/pierre-simple/static/media/amazon.e6040a6b.svg"
   },
   {
     "revision": "ef09fd11494607bcd399735fe939fda2",
