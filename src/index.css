@@ -2,7 +2,8 @@
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,.7) url('./assets/loading.gif') center center no-repeat;
+  background: rgba(0, 0, 0, 0.7) url('./assets/loading.gif') center center
+    no-repeat;
 }
 
 body {
@@ -91,4 +92,11 @@ input {
 
 .no-margin {
   margin: 0px !important;
+}
+
+span.item-name {
+  max-width: 250px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

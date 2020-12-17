@@ -9,27 +9,15 @@ import {
   Box,
   Navbar,
   Heading,
-  Modal,
 } from 'react-bulma-components';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-const { Input, Control, Field, Label } = Form;
+const { Input, Control, Field } = Form;
 
 class List extends React.Component {
   state = {
     itemToAdd: '',
     itemRepeat: '',
-    itemEditRepeat: '',
     burgerOpen: false,
-    showUpdateModal: false,
-    itemToEdit: null,
-    inlineQtyItem: null,
-    itemToEditPrevName: '',
-    confirmModal: {
-      show: false,
-      message: '',
-      okFn: () => {},
-      cancelFn: () => {},
-    },
   };
 
   handleItemChange = (e) => {
@@ -54,93 +42,27 @@ class List extends React.Component {
     }
   };
 
-  openUpdateModal = (item) => {
-    this.setState({
-      itemToEdit: JSON.parse(JSON.stringify(item)),
-      itemToEditPrevName: item.name,
-      showUpdateModal: true,
-    });
-  };
-
-  updateItem = () => {
-    const { itemNames, update } = this.props;
-    const { itemToEdit, itemToEditPrevName } = this.state;
-
-    const itemNamesNew = itemNames.filter(
-      (item) => item !== itemToEditPrevName
-    );
-
-    if (
-      !itemNamesNew.includes(itemToEdit.name.toUpperCase()) &&
-      itemToEdit.name
-    ) {
-      itemToEdit.name = itemToEdit.name.toUpperCase();
-      itemToEdit.aisle = itemToEdit.aisle.toUpperCase();
-      itemToEdit.qty = parseInt(itemToEdit.qty);
-      update(itemToEditPrevName, itemToEdit);
-      this.setState({
-        itemToEditPrevName: '',
-        itemToEdit: null,
-        showUpdateModal: false,
-        itemEditRepeat: '',
-      });
-    } else {
-      this.setState({ itemEditRepeat: 'is-danger' });
+  changeItem = (promptText, item, attribute) => {
+    const { update } = this.props;
+    const newAttribute = prompt(promptText, item[attribute]);
+    if (newAttribute) {
+      if (
+        attribute === 'qty' &&
+        !isNaN(newAttribute) &&
+        parseInt(newAttribute) !== item.qty
+      ) {
+        item[attribute] = parseInt(newAttribute);
+        update(item.name, item);
+      } else if (newAttribute.toUpperCase() !== item[attribute]) {
+        item[attribute] = newAttribute.toUpperCase();
+        update(item.name, item);
+      }
     }
   };
 
-  openClearConfirm = () => {
-    const { clear } = this.props;
-    this.setState({
-      confirmModal: {
-        show: true,
-        message: 'Are you sure you want to clear the list?',
-        okFn: () => {
-          this.closeConfirmModal();
-          clear();
-        },
-        cancelFn: this.closeConfirmModal,
-      },
-    });
-  };
-
-  openPrintConfirm = () => {
-    const { print } = this.props;
-    this.setState({
-      confirmModal: {
-        show: true,
-        message: 'Are you sure you want to print the list?',
-        okFn: (e) => {
-          print(e);
-          this.closeConfirmModal();
-        },
-        cancelFn: this.closeConfirmModal,
-      },
-    });
-  };
-
-  closeConfirmModal = () => {
-    this.setState({
-      confirmModal: {
-        show: false,
-        message: '',
-        okFn: () => {},
-        cancelFn: () => {},
-      },
-    });
-  };
-
   render() {
-    const {
-      burgerOpen,
-      itemToAdd,
-      itemRepeat,
-      itemEditRepeat,
-      showUpdateModal,
-      itemToEdit,
-      confirmModal,
-    } = this.state;
-    const { remove, list, dragStoreEnd, isLoading } = this.props;
+    const { burgerOpen, itemToAdd, itemRepeat } = this.state;
+    const { remove, list, dragStoreEnd, isLoading, print, clear } = this.props;
 
     const grouped_list = _.groupBy(list, 'store');
     const group_names = _.uniq(_.map(list, 'store')).sort();
@@ -168,8 +90,10 @@ class List extends React.Component {
                   <Navbar.Item
                     renderAs='div'
                     className='ml'
-                    onClick={() => {
-                      this.openPrintConfirm();
+                    onClick={(e) => {
+                      window.confirm(
+                        'Are you sure you want to print the list?'
+                      ) && print(e);
                     }}
                   >
                     <FontAwesomeIcon
@@ -180,8 +104,14 @@ class List extends React.Component {
                 )}
                 <Navbar.Item
                   renderAs='div'
-                  onClick={() => {
-                    this.openClearConfirm();
+                  onClick={(e) => {
+                    window.confirm(
+                      'Are you sure you want to clear the list?'
+                    ) &&
+                      window.confirm(
+                        'Are you really really sure you want to clear the list?'
+                      ) &&
+                      clear();
                   }}
                 >
                   <FontAwesomeIcon
@@ -275,59 +205,60 @@ class List extends React.Component {
                                         className='panel-block'
                                         key={`Ptore-Panel-Block-${item.name}`}
                                       >
-                                        <span className='panel-icon'>
+                                        <span
+                                          className='panel-icon'
+                                          onClick={() => {
+                                            this.changeItem(
+                                              `How many ${item.name}'s would you like?`,
+                                              item,
+                                              'qty'
+                                            );
+                                          }}
+                                        >
                                           {item.qty}
                                         </span>
-                                        {item.name}
+                                        <span
+                                          className='item-name'
+                                          title={item.name}
+                                          onClick={() => {
+                                            this.changeItem(
+                                              'What would you like to change the name to?',
+                                              item,
+                                              'name'
+                                            );
+                                          }}
+                                        >
+                                          {item.name}
+                                        </span>
 
                                         <span className='store-panel-icons'>
-                                          {item.aisle !== 'OTHER' && (
-                                            <FontAwesomeIcon
-                                              color='#f7dd57'
-                                              icon={['fa', 'tag']}
-                                              className='clickable'
-                                            />
-                                          )}
-                                          <div className='dropdown is-right is-hoverable'>
-                                            <div className='dropdown-trigger'>
-                                              <FontAwesomeIcon
-                                                icon={['fa', 'bars']}
-                                                className='clickable'
-                                              />
-                                            </div>
-                                            <div
-                                              className='dropdown-menu'
-                                              id='dropdown-menu'
-                                              role='menu'
-                                            >
-                                              <div className='dropdown-content'>
-                                                <div
-                                                  className='dropdown-item'
-                                                  onClick={() => {
-                                                    this.openUpdateModal(item);
-                                                  }}
-                                                >
-                                                  Edit
-                                                  <FontAwesomeIcon
-                                                    icon={['fa', 'wrench']}
-                                                    className='clickable is-pulled-right'
-                                                  />
-                                                </div>
-                                                <div
-                                                  className='dropdown-item'
-                                                  onClick={() => {
-                                                    remove(item);
-                                                  }}
-                                                >
-                                                  Remove
-                                                  <FontAwesomeIcon
-                                                    icon={['fa', 'trash-alt']}
-                                                    className='clickable is-pulled-right'
-                                                  />
-                                                </div>
-                                              </div>
-                                            </div>
-                                          </div>
+                                          <FontAwesomeIcon
+                                            color={
+                                              item.aisle !== 'OTHER'
+                                                ? '#f7dd57'
+                                                : '#878787'
+                                            }
+                                            title={item.aisle}
+                                            icon={['fa', 'tag']}
+                                            className='clickable'
+                                            onClick={() => {
+                                              this.changeItem(
+                                                'What would you like the aisle to be?',
+                                                item,
+                                                'aisle'
+                                              );
+                                            }}
+                                          />
+                                          <FontAwesomeIcon
+                                            icon={['fa', 'trash-alt']}
+                                            color='#f44336'
+                                            className='clickable'
+                                            onClick={() => {
+                                              window.confirm(
+                                                `Are you sure you want to remove ${item.name}?`
+                                              ) && remove(item);
+                                            }}
+                                          />
                                         </span>
                                         {provDrag.placeholder}
                                       </div>
@@ -345,127 +276,6 @@ class List extends React.Component {
                 )
               </Panel>
             </DragDropContext>
-            <Modal
-              show={showUpdateModal}
-              onClose={() =>
-                this.setState({
-                  showUpdateModal: false,
-                  itemToEdit: null,
-                  itemToEditPrevName: '',
-                })
-              }
-            >
-              <Modal.Content>
-                {itemToEdit && (
-                  <Box style={{ margin: '3em' }}>
-                    <div className='columns is-multiline'>
-                      <div className='column is-4'>
-                        <Field>
-                          <Label>Item Name</Label>
-                          <Control>
-                            <Input
-                              className={itemEditRepeat}
-                              placeholder='Item Name'
-                              value={itemToEdit.name}
-                              onChange={(e) => {
-                                itemToEdit.name = e.target.value;
-                                this.setState({ itemToEdit });
-                              }}
-                            />
-                          </Control>
-                        </Field>
-                      </div>
-                      <div className='column is-4'>
-                        <Field>
-                          <Label>Quantity</Label>
-                          <Control>
-                            <Input
-                              min={1}
-                              type='number'
-                              value={itemToEdit.qty}
-                              onChange={(e) => {
-                                itemToEdit.qty = e.target.value;
-                                this.setState({ itemToEdit });
-                              }}
-                            />
-                          </Control>
-                        </Field>
-                      </div>
-                      <div className='column is-4'>
-                        <Field>
-                          <Label>Aisle</Label>
-                          <Control>
-                            <Input
-                              placeholder='Aisle'
-                              value={itemToEdit.aisle}
-                              onChange={(e) => {
-                                itemToEdit.aisle = e.target.value;
-                                this.setState({ itemToEdit });
-                              }}
-                            />
-                          </Control>
-                        </Field>
-                      </div>
-                    </div>
-
-                    <Field className='is-grouped is-grouped-centered'>
-                      <Control>
-                        <Button
-                          color='success'
-                          onClick={() => this.updateItem()}
-                        >
-                          Update
-                        </Button>
-                      </Control>
-                      <Control>
-                        <Button
-                          color='danger'
-                          onClick={() =>
-                            this.setState({
-                              showUpdateModal: false,
-                              itemToEdit: null,
-                              itemToEditPrevName: '',
-                            })
-                          }
-                        >
-                          Cancel
-                        </Button>
-                      </Control>
-                    </Field>
-                  </Box>
-                )}
-              </Modal.Content>
-            </Modal>
-
-            <Modal show={confirmModal.show} onClose={confirmModal.cancelFn}>
-              <Modal.Content>
-                {confirmModal.show && (
-                  <Box style={{ margin: '3em' }}>
-                    <h3 className='title is-3 has-text-centered'>
-                      {confirmModal.message}
-                    </h3>
-                    <Field className='is-grouped is-grouped-centered'>
-                      <Control>
-                        <Button
-                          color='success'
-                          onClick={(e) => confirmModal.okFn(e)}
-                        >
-                          Yes
-                        </Button>
-                      </Control>
-                      <Control>
-                        <Button
-                          color='danger'
-                          onClick={() => confirmModal.cancelFn()}
-                        >
-                          No
-                        </Button>
-                      </Control>
-                    </Field>
-                  </Box>
-                )}
-              </Modal.Content>
-            </Modal>
           </>
         )}
       </>
