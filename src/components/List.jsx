@@ -1,4 +1,4 @@
-import { STORES } from '../utils/utils';
+import { STORES, SpinnerOverlay } from '../utils/utils';
 import React from 'react';
 import _ from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -140,7 +140,7 @@ class List extends React.Component {
       itemToEdit,
       confirmModal,
     } = this.state;
-    const { remove, list, dragStoreEnd } = this.props;
+    const { remove, list, dragStoreEnd, isLoading } = this.props;
 
     const grouped_list = _.groupBy(list, 'store');
     const group_names = _.uniq(_.map(list, 'store')).sort();
@@ -153,312 +153,321 @@ class List extends React.Component {
 
     return (
       <>
-        <Navbar color='dark' fixed='top' active={burgerOpen}>
-          <Navbar.Brand>
-            <Navbar.Item>
-              <Heading size={3} className='has-text-primary'>
-                Pierre
-              </Heading>
-            </Navbar.Item>
-            {list.length > 0 && (
-              <Navbar.Item
-                renderAs='div'
-                className='ml'
-                onClick={() => {
-                  this.openPrintConfirm();
-                }}
-              >
-                <FontAwesomeIcon
-                  icon={['fa', 'print']}
-                  className='has-text-primary'
-                />
-              </Navbar.Item>
-            )}
-            <Navbar.Item
-              renderAs='div'
-              onClick={() => {
-                this.openClearConfirm();
+        {isLoading ? (
+          SpinnerOverlay
+        ) : (
+          <>
+            <Navbar color='dark' fixed='top' active={burgerOpen}>
+              <Navbar.Brand>
+                <Navbar.Item>
+                  <Heading size={3} className='has-text-primary'>
+                    Pierre
+                  </Heading>
+                </Navbar.Item>
+                {list.length > 0 && (
+                  <Navbar.Item
+                    renderAs='div'
+                    className='ml'
+                    onClick={() => {
+                      this.openPrintConfirm();
+                    }}
+                  >
+                    <FontAwesomeIcon
+                      icon={['fa', 'print']}
+                      className='has-text-primary'
+                    />
+                  </Navbar.Item>
+                )}
+                <Navbar.Item
+                  renderAs='div'
+                  onClick={() => {
+                    this.openClearConfirm();
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={['fa', 'broom']}
+                    className='has-text-primary'
+                  />
+                </Navbar.Item>
+              </Navbar.Brand>
+            </Navbar>
+            <DragDropContext
+              onDragEnd={(e) => {
+                dragStoreEnd(e);
               }}
             >
-              <FontAwesomeIcon
-                icon={['fa', 'broom']}
-                className='has-text-primary'
-              />
-            </Navbar.Item>
-          </Navbar.Brand>
-        </Navbar>
-        <DragDropContext
-          onDragEnd={(e) => {
-            dragStoreEnd(e);
-          }}
-        >
-          <Panel>
-            <Box>
-              <Field kind='addons'>
-                <Control className='is-expanded'>
-                  <Input
-                    onKeyPress={(e) => {
-                      this.handleKeyPress(e);
-                    }}
-                    className={itemRepeat}
-                    value={itemToAdd}
-                    placeholder='Add Item'
-                    type='text'
-                    onChange={(e) => {
-                      this.handleItemChange(e);
-                    }}
-                  />
-                </Control>
-                <Control>
-                  <Button
-                    renderAs='button'
-                    onClick={() => {
-                      this.addItem();
-                    }}
-                  >
-                    <FontAwesomeIcon icon={['fa', 'plus']} />
-                  </Button>
-                </Control>
-                <Control>
-                  <Button renderAs='button'>
-                    <FontAwesomeIcon
-                      icon={['fa', 'ban']}
-                      onClick={() => {
-                        this.setState({ itemToAdd: '' });
-                      }}
-                    />
-                  </Button>
-                </Control>
-              </Field>
-            </Box>
-
-            <div className='store-panels'>
-              <div className='columns is-multiline'>
-                {group_names.map((group) => (
-                  <Droppable
-                    key={`DROPPABLE-TOP-${group}`}
-                    droppableId={group}
-                    type='STORE'
-                  >
-                    {(provDrop, snapDrop) => (
-                      <div
-                        ref={provDrop.innerRef}
-                        {...provDrop.droppableProps}
-                        className='column store-panel is-4'
-                        key={`Store-Panel-${group}`}
+              <Panel>
+                <Box>
+                  <Field kind='addons'>
+                    <Control className='is-expanded'>
+                      <Input
+                        onKeyPress={(e) => {
+                          this.handleKeyPress(e);
+                        }}
+                        className={itemRepeat}
+                        value={itemToAdd}
+                        placeholder='Add Item'
+                        type='text'
+                        onChange={(e) => {
+                          this.handleItemChange(e);
+                        }}
+                      />
+                    </Control>
+                    <Control>
+                      <Button
+                        renderAs='button'
+                        onClick={() => {
+                          this.addItem();
+                        }}
                       >
-                        <div className='panel'>
-                          <p className='panel-heading'>
-                            <span className='store-panel-header-item'>
-                              {STORES[group]}
-                            </span>
-                            <span className='store-panel-header-item ml-3'>
-                              {group}
-                            </span>
-                          </p>
+                        <FontAwesomeIcon icon={['fa', 'plus']} />
+                      </Button>
+                    </Control>
+                    <Control>
+                      <Button renderAs='button'>
+                        <FontAwesomeIcon
+                          icon={['fa', 'ban']}
+                          onClick={() => {
+                            this.setState({ itemToAdd: '' });
+                          }}
+                        />
+                      </Button>
+                    </Control>
+                  </Field>
+                </Box>
+                <div className='store-panels'>
+                  <div className='columns is-multiline'>
+                    {group_names.map((group) => (
+                      <Droppable
+                        key={`DROPPABLE-TOP-${group}`}
+                        droppableId={group}
+                        type='STORE'
+                      >
+                        {(provDrop, snapDrop) => (
+                          <div
+                            ref={provDrop.innerRef}
+                            {...provDrop.droppableProps}
+                            className='column store-panel is-4'
+                            key={`Store-Panel-${group}`}
+                          >
+                            <div className='panel'>
+                              <p className='panel-heading'>
+                                <span className='store-panel-header-item'>
+                                  {STORES[group]}
+                                </span>
+                                <span className='store-panel-header-item ml-3'>
+                                  {group}
+                                </span>
+                              </p>
 
-                          {grouped_list[group] &&
-                            grouped_list[group].map((item, idx) => (
-                              <Draggable
-                                key={`DRAGGABLE-TOP-${item.name}`}
-                                draggableId={item.id}
-                                index={idx}
-                              >
-                                {(provDrag, snapDrag) => (
-                                  <div
-                                    ref={provDrag.innerRef}
-                                    {...provDrag.draggableProps}
-                                    {...provDrag.dragHandleProps}
-                                    className='panel-block'
-                                    key={`Ptore-Panel-Block-${item.name}`}
+                              {grouped_list[group] &&
+                                grouped_list[group].map((item, idx) => (
+                                  <Draggable
+                                    key={`DRAGGABLE-TOP-${item.name}`}
+                                    draggableId={item.id}
+                                    index={idx}
                                   >
-                                    <span className='panel-icon'>
-                                      {item.qty}
-                                    </span>
-                                    {item.name}
+                                    {(provDrag, snapDrag) => (
+                                      <div
+                                        ref={provDrag.innerRef}
+                                        {...provDrag.draggableProps}
+                                        {...provDrag.dragHandleProps}
+                                        className='panel-block'
+                                        key={`Ptore-Panel-Block-${item.name}`}
+                                      >
+                                        <span className='panel-icon'>
+                                          {item.qty}
+                                        </span>
+                                        {item.name}
 
-                                    <span className='store-panel-icons'>
-                                      {item.aisle !== 'OTHER' && (
-                                        <FontAwesomeIcon
-                                          color='#f7dd57'
-                                          icon={['fa', 'tag']}
-                                          className='clickable'
-                                        />
-                                      )}
-                                      <div className='dropdown is-right is-hoverable'>
-                                        <div className='dropdown-trigger'>
-                                          <FontAwesomeIcon
-                                            icon={['fa', 'bars']}
-                                            className='clickable'
-                                          />
-                                        </div>
-                                        <div
-                                          className='dropdown-menu'
-                                          id='dropdown-menu'
-                                          role='menu'
-                                        >
-                                          <div className='dropdown-content'>
-                                            <div
-                                              className='dropdown-item'
-                                              onClick={() => {
-                                                this.openUpdateModal(item);
-                                              }}
-                                            >
-                                              Edit
+                                        <span className='store-panel-icons'>
+                                          {item.aisle !== 'OTHER' && (
+                                            <FontAwesomeIcon
+                                              color='#f7dd57'
+                                              icon={['fa', 'tag']}
+                                              className='clickable'
+                                            />
+                                          )}
+                                          <div className='dropdown is-right is-hoverable'>
+                                            <div className='dropdown-trigger'>
                                               <FontAwesomeIcon
-                                                icon={['fa', 'wrench']}
-                                                className='clickable is-pulled-right'
+                                                icon={['fa', 'bars']}
+                                                className='clickable'
                                               />
                                             </div>
                                             <div
-                                              className='dropdown-item'
-                                              onClick={() => {
-                                                remove(item);
-                                              }}
+                                              className='dropdown-menu'
+                                              id='dropdown-menu'
+                                              role='menu'
                                             >
-                                              Remove
-                                              <FontAwesomeIcon
-                                                icon={['fa', 'trash-alt']}
-                                                className='clickable is-pulled-right'
-                                              />
+                                              <div className='dropdown-content'>
+                                                <div
+                                                  className='dropdown-item'
+                                                  onClick={() => {
+                                                    this.openUpdateModal(item);
+                                                  }}
+                                                >
+                                                  Edit
+                                                  <FontAwesomeIcon
+                                                    icon={['fa', 'wrench']}
+                                                    className='clickable is-pulled-right'
+                                                  />
+                                                </div>
+                                                <div
+                                                  className='dropdown-item'
+                                                  onClick={() => {
+                                                    remove(item);
+                                                  }}
+                                                >
+                                                  Remove
+                                                  <FontAwesomeIcon
+                                                    icon={['fa', 'trash-alt']}
+                                                    className='clickable is-pulled-right'
+                                                  />
+                                                </div>
+                                              </div>
                                             </div>
                                           </div>
-                                        </div>
+                                        </span>
+                                        {provDrag.placeholder}
                                       </div>
-                                    </span>
-                                    {provDrag.placeholder}
-                                  </div>
-                                )}
-                              </Draggable>
-                            ))}
-                        </div>
-                        {provDrop.placeholder}
-                      </div>
-                    )}
-                  </Droppable>
-                ))}
-              </div>
-            </div>
-          </Panel>
-        </DragDropContext>
-        <Modal
-          show={showUpdateModal}
-          onClose={() =>
-            this.setState({
-              showUpdateModal: false,
-              itemToEdit: null,
-              itemToEditPrevName: '',
-            })
-          }
-        >
-          <Modal.Content>
-            {itemToEdit && (
-              <Box style={{ margin: '3em' }}>
-                <div className='columns is-multiline'>
-                  <div className='column is-4'>
-                    <Field>
-                      <Label>Item Name</Label>
-                      <Control>
-                        <Input
-                          className={itemEditRepeat}
-                          placeholder='Item Name'
-                          value={itemToEdit.name}
-                          onChange={(e) => {
-                            itemToEdit.name = e.target.value;
-                            this.setState({ itemToEdit });
-                          }}
-                        />
-                      </Control>
-                    </Field>
-                  </div>
-                  <div className='column is-4'>
-                    <Field>
-                      <Label>Quantity</Label>
-                      <Control>
-                        <Input
-                          min={1}
-                          type='number'
-                          value={itemToEdit.qty}
-                          onChange={(e) => {
-                            itemToEdit.qty = e.target.value;
-                            this.setState({ itemToEdit });
-                          }}
-                        />
-                      </Control>
-                    </Field>
-                  </div>
-                  <div className='column is-4'>
-                    <Field>
-                      <Label>Aisle</Label>
-                      <Control>
-                        <Input
-                          placeholder='Aisle'
-                          value={itemToEdit.aisle}
-                          onChange={(e) => {
-                            itemToEdit.aisle = e.target.value;
-                            this.setState({ itemToEdit });
-                          }}
-                        />
-                      </Control>
-                    </Field>
+                                    )}
+                                  </Draggable>
+                                ))}
+                            </div>
+                            {provDrop.placeholder}
+                          </div>
+                        )}
+                      </Droppable>
+                    ))}
                   </div>
                 </div>
+                )
+              </Panel>
+            </DragDropContext>
+            <Modal
+              show={showUpdateModal}
+              onClose={() =>
+                this.setState({
+                  showUpdateModal: false,
+                  itemToEdit: null,
+                  itemToEditPrevName: '',
+                })
+              }
+            >
+              <Modal.Content>
+                {itemToEdit && (
+                  <Box style={{ margin: '3em' }}>
+                    <div className='columns is-multiline'>
+                      <div className='column is-4'>
+                        <Field>
+                          <Label>Item Name</Label>
+                          <Control>
+                            <Input
+                              className={itemEditRepeat}
+                              placeholder='Item Name'
+                              value={itemToEdit.name}
+                              onChange={(e) => {
+                                itemToEdit.name = e.target.value;
+                                this.setState({ itemToEdit });
+                              }}
+                            />
+                          </Control>
+                        </Field>
+                      </div>
+                      <div className='column is-4'>
+                        <Field>
+                          <Label>Quantity</Label>
+                          <Control>
+                            <Input
+                              min={1}
+                              type='number'
+                              value={itemToEdit.qty}
+                              onChange={(e) => {
+                                itemToEdit.qty = e.target.value;
+                                this.setState({ itemToEdit });
+                              }}
+                            />
+                          </Control>
+                        </Field>
+                      </div>
+                      <div className='column is-4'>
+                        <Field>
+                          <Label>Aisle</Label>
+                          <Control>
+                            <Input
+                              placeholder='Aisle'
+                              value={itemToEdit.aisle}
+                              onChange={(e) => {
+                                itemToEdit.aisle = e.target.value;
+                                this.setState({ itemToEdit });
+                              }}
+                            />
+                          </Control>
+                        </Field>
+                      </div>
+                    </div>
 
-                <Field className='is-grouped is-grouped-centered'>
-                  <Control>
-                    <Button color='success' onClick={() => this.updateItem()}>
-                      Update
-                    </Button>
-                  </Control>
-                  <Control>
-                    <Button
-                      color='danger'
-                      onClick={() =>
-                        this.setState({
-                          showUpdateModal: false,
-                          itemToEdit: null,
-                          itemToEditPrevName: '',
-                        })
-                      }
-                    >
-                      Cancel
-                    </Button>
-                  </Control>
-                </Field>
-              </Box>
-            )}
-          </Modal.Content>
-        </Modal>
+                    <Field className='is-grouped is-grouped-centered'>
+                      <Control>
+                        <Button
+                          color='success'
+                          onClick={() => this.updateItem()}
+                        >
+                          Update
+                        </Button>
+                      </Control>
+                      <Control>
+                        <Button
+                          color='danger'
+                          onClick={() =>
+                            this.setState({
+                              showUpdateModal: false,
+                              itemToEdit: null,
+                              itemToEditPrevName: '',
+                            })
+                          }
+                        >
+                          Cancel
+                        </Button>
+                      </Control>
+                    </Field>
+                  </Box>
+                )}
+              </Modal.Content>
+            </Modal>
 
-        <Modal show={confirmModal.show} onClose={confirmModal.cancelFn}>
-          <Modal.Content>
-            {confirmModal.show && (
-              <Box style={{ margin: '3em' }}>
-                <h3 className='title is-3 has-text-centered'>
-                  {confirmModal.message}
-                </h3>
-                <Field className='is-grouped is-grouped-centered'>
-                  <Control>
-                    <Button
-                      color='success'
-                      onClick={(e) => confirmModal.okFn(e)}
-                    >
-                      Yes
-                    </Button>
-                  </Control>
-                  <Control>
-                    <Button
-                      color='danger'
-                      onClick={() => confirmModal.cancelFn()}
-                    >
-                      No
-                    </Button>
-                  </Control>
-                </Field>
-              </Box>
-            )}
-          </Modal.Content>
-        </Modal>
+            <Modal show={confirmModal.show} onClose={confirmModal.cancelFn}>
+              <Modal.Content>
+                {confirmModal.show && (
+                  <Box style={{ margin: '3em' }}>
+                    <h3 className='title is-3 has-text-centered'>
+                      {confirmModal.message}
+                    </h3>
+                    <Field className='is-grouped is-grouped-centered'>
+                      <Control>
+                        <Button
+                          color='success'
+                          onClick={(e) => confirmModal.okFn(e)}
+                        >
+                          Yes
+                        </Button>
+                      </Control>
+                      <Control>
+                        <Button
+                          color='danger'
+                          onClick={() => confirmModal.cancelFn()}
+                        >
+                          No
+                        </Button>
+                      </Control>
+                    </Field>
+                  </Box>
+                )}
+              </Modal.Content>
+            </Modal>
+          </>
+        )}
       </>
     );
   }

@@ -9,7 +9,7 @@ import List from './components/List';
 const BASE_URL = 'https://pierre-289818.uc.r.appspot.com';
 
 class App extends React.Component {
-  state = { list: [], itemNames: [] };
+  state = { list: [], itemNames: [], isLoading: true };
 
   sortList = (list) => {
     list.sort((a, b) => (a.name > b.name ? 1 : -1));
@@ -103,13 +103,14 @@ class App extends React.Component {
   };
 
   async componentDidMount() {
+    this.setState({ isLoading: true });
     const list = await axios.get(`${BASE_URL}/list`);
     const itemNames = list.data.map((i) => i.name);
-    this.setState({ list: list.data, itemNames });
+    this.setState({ list: list.data, itemNames, isLoading: false });
   }
 
   render() {
-    const { list, itemNames } = this.state;
+    const { list, itemNames, isLoading } = this.state;
     return (
       <div>
         <List
@@ -121,6 +122,7 @@ class App extends React.Component {
           clear={this.clearList}
           print={this.printList}
           dragStoreEnd={this.dragStoreEnd}
+          isLoading={isLoading}
         />
       </div>
     );

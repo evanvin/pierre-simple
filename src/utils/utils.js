@@ -67,3 +67,10 @@ export const formatList = (items) => {
 
   return list;
 };
+
+
+export const SpinnerOverlay = (
+  <div id="spinner-overlay">
+    
+  </div>
+)
