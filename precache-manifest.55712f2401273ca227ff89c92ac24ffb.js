@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0a87eb798f4cf70ca0f740c8598a8063",
+    "revision": "a619af53e750c0b72d659dd0bb138a68",
     "url": "/pierre-simple/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pierre-simple/static/css/2.0111e717.chunk.css"
   },
   {
-    "revision": "fab3d39b37d4e2ae9ba7",
+    "revision": "42fe0df3f5418a90c568",
     "url": "/pierre-simple/static/css/main.5d0ae5f2.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/pierre-simple/static/js/2.b0aa1361.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "fab3d39b37d4e2ae9ba7",
-    "url": "/pierre-simple/static/js/main.dc4f02a0.chunk.js"
+    "revision": "42fe0df3f5418a90c568",
+    "url": "/pierre-simple/static/js/main.964bb450.chunk.js"
   },
   {
     "revision": "e8ee0e6323fff15160e0",
