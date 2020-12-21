@@ -153,7 +153,7 @@ class List extends React.Component {
               }}
             >
               <Panel>
-                <Box>
+                <Box className="desktop-add-item-bar">
                   <Field kind='addons'>
                     <Control className='is-expanded'>
                       <Input
