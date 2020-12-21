@@ -62,7 +62,7 @@ class List extends React.Component {
 
   render() {
     const { burgerOpen, itemToAdd, itemRepeat } = this.state;
-    const { remove, list, dragStoreEnd, isLoading, print, clear, addGithubIssue } = this.props;
+    const { remove, list, dragStoreEnd, isLoading, print, clear, createGithubIssue } = this.props;
 
     const grouped_list = _.groupBy(list, 'store');
     const group_names = _.uniq(_.map(list, 'store')).sort();
@@ -127,7 +127,7 @@ class List extends React.Component {
                   title='Add Github Issue'
                   className='clickable'
                   onClick={(e) => {
-                    addGithubIssue();
+                    createGithubIssue();
                   }}
                 >
                   <FontAwesomeIcon

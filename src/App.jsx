@@ -101,13 +101,13 @@ class App extends React.Component {
       });
   };
 
-  createGithubIssue = async (issue) => {
+  createGithubIssue = async () => {
     const issue = prompt(
       'What issue would you like to add to the github project?',
       ''
     );
     if (issue) {
-      axios.post(`${BASE_URL}/github_issue`, issue).then((res) => {
+      axios.post(`${BASE_URL}/github_issue`, { issue }).then((res) => {
         console.log(res);
       });
     }
