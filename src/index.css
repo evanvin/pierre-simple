@@ -1,3 +1,8 @@
+:root {
+  --background: #f8f8f8;
+  --dark: #303032;
+}
+
 #spinner-overlay {
   position: fixed;
   width: 100%;
@@ -6,18 +11,25 @@
     no-repeat;
 }
 
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }
 
 .clickable {
@@ -99,4 +111,50 @@ span.item-name {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.loader-box {
+  position: relative;
+  background: var(--dark);
+  border: 0.25rem solid var(--dark);
+  height: 15rem;
+  width: 15rem;
+  outline: 0;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.loader-box::before {
+  content: url(assets/pierre.svg);
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-box::after {
+  content: "";
+  position: absolute;
+  bottom: -50px;
+  left: -50%;
+  height: 200%;
+  width: 200%;
+  background-color: var(--background);
+  border-radius: 45%;
+  animation: spin 5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-80%) rotate(500deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(1000deg);
+  }
 }
