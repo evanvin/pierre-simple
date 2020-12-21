@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/pierre-simple/static/css/main.f4f2626a.chunk.css",
-    "main.js": "/pierre-simple/static/js/main.161729d4.chunk.js",
-    "main.js.map": "/pierre-simple/static/js/main.161729d4.chunk.js.map",
+    "main.css": "/pierre-simple/static/css/main.5d0ae5f2.chunk.css",
+    "main.js": "/pierre-simple/static/js/main.39a88571.chunk.js",
+    "main.js.map": "/pierre-simple/static/js/main.39a88571.chunk.js.map",
     "runtime-main.js": "/pierre-simple/static/js/runtime-main.42a0344c.js",
     "runtime-main.js.map": "/pierre-simple/static/js/runtime-main.42a0344c.js.map",
     "static/css/2.0111e717.chunk.css": "/pierre-simple/static/css/2.0111e717.chunk.css",
-    "static/js/2.cebccd8a.chunk.js": "/pierre-simple/static/js/2.cebccd8a.chunk.js",
-    "static/js/2.cebccd8a.chunk.js.map": "/pierre-simple/static/js/2.cebccd8a.chunk.js.map",
+    "static/js/2.a989ba6a.chunk.js": "/pierre-simple/static/js/2.a989ba6a.chunk.js",
+    "static/js/2.a989ba6a.chunk.js.map": "/pierre-simple/static/js/2.a989ba6a.chunk.js.map",
     "index.html": "/pierre-simple/index.html",
-    "precache-manifest.ea3284c3bb902ee56c19edef8c96ea73.js": "/pierre-simple/precache-manifest.ea3284c3bb902ee56c19edef8c96ea73.js",
+    "precache-manifest.1efb3fd7a466b372d73735198ee3e4ed.js": "/pierre-simple/precache-manifest.1efb3fd7a466b372d73735198ee3e4ed.js",
     "service-worker.js": "/pierre-simple/service-worker.js",
     "static/css/2.0111e717.chunk.css.map": "/pierre-simple/static/css/2.0111e717.chunk.css.map",
-    "static/css/main.f4f2626a.chunk.css.map": "/pierre-simple/static/css/main.f4f2626a.chunk.css.map",
-    "static/js/2.cebccd8a.chunk.js.LICENSE.txt": "/pierre-simple/static/js/2.cebccd8a.chunk.js.LICENSE.txt",
+    "static/css/main.5d0ae5f2.chunk.css.map": "/pierre-simple/static/css/main.5d0ae5f2.chunk.css.map",
+    "static/js/2.a989ba6a.chunk.js.LICENSE.txt": "/pierre-simple/static/js/2.a989ba6a.chunk.js.LICENSE.txt",
     "static/media/aldi.25328789.svg": "/pierre-simple/static/media/aldi.25328789.svg",
     "static/media/amazon.e6040a6b.svg": "/pierre-simple/static/media/amazon.e6040a6b.svg",
     "static/media/goodwill.ef09fd11.svg": "/pierre-simple/static/media/goodwill.ef09fd11.svg",
@@ -21,8 +21,8 @@
     "static/media/homedepot.90ff30de.svg": "/pierre-simple/static/media/homedepot.90ff30de.svg",
     "static/media/homegoods.fa35c81d.svg": "/pierre-simple/static/media/homegoods.fa35c81d.svg",
     "static/media/latelas.af764927.svg": "/pierre-simple/static/media/latelas.af764927.svg",
-    "static/media/index.css": "/pierre-simple/static/media/loading.d064edcc.gif",
     "static/media/other.52bcb59b.svg": "/pierre-simple/static/media/other.52bcb59b.svg",
+    "static/media/index.css": "/pierre-simple/static/media/pierre.ef206ebe.svg",
     "static/media/safeway.aac20ce9.svg": "/pierre-simple/static/media/safeway.aac20ce9.svg",
     "static/media/ups.f67b1006.svg": "/pierre-simple/static/media/ups.f67b1006.svg",
     "static/media/walmart.6c8f85d7.svg": "/pierre-simple/static/media/walmart.6c8f85d7.svg"
@@ -30,8 +30,8 @@
   "entrypoints": [
     "static/js/runtime-main.42a0344c.js",
     "static/css/2.0111e717.chunk.css",
-    "static/js/2.cebccd8a.chunk.js",
-    "static/css/main.f4f2626a.chunk.css",
-    "static/js/main.161729d4.chunk.js"
+    "static/js/2.a989ba6a.chunk.js",
+    "static/css/main.5d0ae5f2.chunk.css",
+    "static/js/main.39a88571.chunk.js"
   ]
 }
