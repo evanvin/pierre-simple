@@ -148,3 +148,15 @@ span.item-name {
     transform: translateY(0) rotate(1000deg);
   }
 }
+
+@media only screen and (max-width: 1200px) {
+  span.item-name {
+    max-width: 150px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  span.item-name {
+    max-width: 100px;
+  }
+}
