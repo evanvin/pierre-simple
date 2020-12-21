@@ -109,7 +109,6 @@ class App extends React.Component {
     if (issue) {
       axios.post(`${BASE_URL}/github_issue`, issue).then((res) => {
         console.log(res);
-        this.setState({ list: [], itemNames: [] });
       });
     }
   };
