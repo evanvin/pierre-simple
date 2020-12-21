@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ff9e87471b97d01cc6e185049f8eaf32",
+    "revision": "0a87eb798f4cf70ca0f740c8598a8063",
     "url": "/pierre-simple/index.html"
   },
   {
-    "revision": "f02c4589d9de8c6b0658",
+    "revision": "9628d8126ec2f09fdc7a",
     "url": "/pierre-simple/static/css/2.0111e717.chunk.css"
   },
   {
-    "revision": "d2c4d7a683f6f0cfc2ca",
+    "revision": "fab3d39b37d4e2ae9ba7",
     "url": "/pierre-simple/static/css/main.5d0ae5f2.chunk.css"
   },
   {
-    "revision": "f02c4589d9de8c6b0658",
-    "url": "/pierre-simple/static/js/2.a989ba6a.chunk.js"
+    "revision": "9628d8126ec2f09fdc7a",
+    "url": "/pierre-simple/static/js/2.b0aa1361.chunk.js"
   },
   {
-    "revision": "2aa686aaddef6708355622f446cae2e4",
-    "url": "/pierre-simple/static/js/2.a989ba6a.chunk.js.LICENSE.txt"
+    "revision": "0f42463c5b44c89c5d740b8390350b83",
+    "url": "/pierre-simple/static/js/2.b0aa1361.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d2c4d7a683f6f0cfc2ca",
-    "url": "/pierre-simple/static/js/main.39a88571.chunk.js"
+    "revision": "fab3d39b37d4e2ae9ba7",
+    "url": "/pierre-simple/static/js/main.dc4f02a0.chunk.js"
   },
   {
     "revision": "e8ee0e6323fff15160e0",

@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/pierre-simple/static/css/main.5d0ae5f2.chunk.css",
-    "main.js": "/pierre-simple/static/js/main.39a88571.chunk.js",
-    "main.js.map": "/pierre-simple/static/js/main.39a88571.chunk.js.map",
+    "main.js": "/pierre-simple/static/js/main.dc4f02a0.chunk.js",
+    "main.js.map": "/pierre-simple/static/js/main.dc4f02a0.chunk.js.map",
     "runtime-main.js": "/pierre-simple/static/js/runtime-main.42a0344c.js",
     "runtime-main.js.map": "/pierre-simple/static/js/runtime-main.42a0344c.js.map",
     "static/css/2.0111e717.chunk.css": "/pierre-simple/static/css/2.0111e717.chunk.css",
-    "static/js/2.a989ba6a.chunk.js": "/pierre-simple/static/js/2.a989ba6a.chunk.js",
-    "static/js/2.a989ba6a.chunk.js.map": "/pierre-simple/static/js/2.a989ba6a.chunk.js.map",
+    "static/js/2.b0aa1361.chunk.js": "/pierre-simple/static/js/2.b0aa1361.chunk.js",
+    "static/js/2.b0aa1361.chunk.js.map": "/pierre-simple/static/js/2.b0aa1361.chunk.js.map",
     "index.html": "/pierre-simple/index.html",
-    "precache-manifest.1efb3fd7a466b372d73735198ee3e4ed.js": "/pierre-simple/precache-manifest.1efb3fd7a466b372d73735198ee3e4ed.js",
+    "precache-manifest.f376365eeb8f5fa7b3953d58bd1d15f6.js": "/pierre-simple/precache-manifest.f376365eeb8f5fa7b3953d58bd1d15f6.js",
     "service-worker.js": "/pierre-simple/service-worker.js",
     "static/css/2.0111e717.chunk.css.map": "/pierre-simple/static/css/2.0111e717.chunk.css.map",
     "static/css/main.5d0ae5f2.chunk.css.map": "/pierre-simple/static/css/main.5d0ae5f2.chunk.css.map",
-    "static/js/2.a989ba6a.chunk.js.LICENSE.txt": "/pierre-simple/static/js/2.a989ba6a.chunk.js.LICENSE.txt",
+    "static/js/2.b0aa1361.chunk.js.LICENSE.txt": "/pierre-simple/static/js/2.b0aa1361.chunk.js.LICENSE.txt",
     "static/media/aldi.25328789.svg": "/pierre-simple/static/media/aldi.25328789.svg",
     "static/media/amazon.e6040a6b.svg": "/pierre-simple/static/media/amazon.e6040a6b.svg",
     "static/media/goodwill.ef09fd11.svg": "/pierre-simple/static/media/goodwill.ef09fd11.svg",
@@ -30,8 +30,8 @@
   "entrypoints": [
     "static/js/runtime-main.42a0344c.js",
     "static/css/2.0111e717.chunk.css",
-    "static/js/2.a989ba6a.chunk.js",
+    "static/js/2.b0aa1361.chunk.js",
     "static/css/main.5d0ae5f2.chunk.css",
-    "static/js/main.39a88571.chunk.js"
+    "static/js/main.dc4f02a0.chunk.js"
   ]
 }
