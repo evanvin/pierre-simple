@@ -14,12 +14,19 @@ class App extends React.Component {
     list.sort((a, b) => (a.name > b.name ? 1 : -1));
   };
 
-  addItem = (itemName) => {
+  addItem = (itemName, store, aisle) => {
     const { list, itemNames } = this.state;
+    // Aisle massaging
+    if (aisle && aisle !== '') {
+      aisle = aisle.toUpperCase();
+    } else {
+      aisle = 'OTHER';
+    }
+
     const item = {
       name: itemName.toUpperCase(),
-      aisle: 'OTHER',
-      store: 'Other',
+      aisle,
+      store,
       qty: 1,
     };
 

@@ -19,6 +19,7 @@ const icon = (ICON) => {
 };
 
 export const STORES = {
+  Other: icon(Other),
   Aldi: icon(Aldi),
   Amazon: icon(Amazon),
   Goodwill: icon(Goodwill),
@@ -26,7 +27,6 @@ export const STORES = {
   'Home Depot': icon(HomeDepot),
   HomeGoods: icon(HomeGoods),
   "Latela's": icon(Latelas),
-  Other: icon(Other),
   Safeway: icon(Safeway),
   UPS: icon(UPS),
   Walmart: icon(Walmart),

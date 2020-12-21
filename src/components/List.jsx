@@ -18,10 +18,8 @@ class List extends React.Component {
     itemToAdd: '',
     itemRepeat: '',
     burgerOpen: false,
-  };
-
-  handleItemChange = (e) => {
-    this.setState({ itemToAdd: e.target.value });
+    selectedStore: 'Other',
+    selectedAisle: null,
   };
 
   handleKeyPress = (e) => {
@@ -32,12 +30,19 @@ class List extends React.Component {
 
   addItem = () => {
     const { itemNames, add } = this.props;
-    const { itemToAdd } = this.state;
+    const { itemToAdd, selectedStore, selectedAisle } = this.state;
 
     if (!itemNames.includes(itemToAdd.toUpperCase()) && itemToAdd) {
-      add(itemToAdd);
-      this.setState({ itemToAdd: '', itemRepeat: '' });
+      // If item with name doesn't already exist, add it
+      add(itemToAdd, selectedStore, selectedAisle);
+      this.setState({
+        itemToAdd: '',
+        itemRepeat: '',
+        selectedStore: 'Other',
+        selectedAisle: null,
+      });
     } else {
+      // Else show a red outline on the input box
       this.setState({ itemRepeat: 'is-danger' });
     }
   };
@@ -61,8 +66,22 @@ class List extends React.Component {
   };
 
   render() {
-    const { burgerOpen, itemToAdd, itemRepeat } = this.state;
-    const { remove, list, dragStoreEnd, isLoading, print, clear, createGithubIssue } = this.props;
+    const {
+      burgerOpen,
+      itemToAdd,
+      itemRepeat,
+      selectedStore,
+      selectedAisle,
+    } = this.state;
+    const {
+      remove,
+      list,
+      dragStoreEnd,
+      isLoading,
+      print,
+      clear,
+      createGithubIssue,
+    } = this.props;
 
     const grouped_list = _.groupBy(list, 'store');
     const group_names = _.uniq(_.map(list, 'store')).sort();
@@ -143,7 +162,7 @@ class List extends React.Component {
               }}
             >
               <Panel>
-                <Box className="desktop-add-item-bar">
+                <Box className='desktop-add-item-bar'>
                   <Field kind='addons'>
                     <Control className='is-expanded'>
                       <Input
@@ -155,7 +174,38 @@ class List extends React.Component {
                         placeholder='Add Item'
                         type='text'
                         onChange={(e) => {
-                          this.handleItemChange(e);
+                          this.setState({ itemToAdd: e.target.value });
+                        }}
+                      />
+                    </Control>
+                    <Control>
+                      <span className='select'>
+                        <select
+                          value={selectedStore}
+                          onChange={(e) => {
+                            this.setState({ selectedStore: e.target.value });
+                          }}
+                        >
+                          {Object.keys(STORES).map((k) => {
+                            return (
+                              <option key={`store-option-${k}`} value={k}>
+                                {k}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </span>
+                    </Control>
+                    <Control>
+                      <Input
+                        onKeyPress={(e) => {
+                          this.handleKeyPress(e);
+                        }}
+                        value={selectedAisle || ''}
+                        placeholder='Aisle'
+                        type='text'
+                        onChange={(e) => {
+                          this.setState({ selectedAisle: e.target.value });
                         }}
                       />
                     </Control>
@@ -174,7 +224,12 @@ class List extends React.Component {
                         <FontAwesomeIcon
                           icon={['fa', 'ban']}
                           onClick={() => {
-                            this.setState({ itemToAdd: '' });
+                            this.setState({
+                              itemToAdd: '',
+                              itemRepeat: '',
+                              selectedStore: 'Other',
+                              selectedAisle: null,
+                            });
                           }}
                         />
                       </Button>
