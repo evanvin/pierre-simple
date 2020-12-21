@@ -2,12 +2,10 @@ import { formatList } from './utils/utils';
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import axios from 'axios';
-import { Octokit } from '@octokit/rest';
 
 import List from './components/List';
 
 const BASE_URL = 'https://pierre-289818.uc.r.appspot.com';
-let octokit = null;
 
 class App extends React.Component {
   state = { list: [], itemNames: [], isLoading: true };
@@ -104,17 +102,15 @@ class App extends React.Component {
   };
 
   createGithubIssue = async (issue) => {
-    if (octokit) {
-      const x = await octokit.issues.create({
-        owner: 'evanvin',
-        repo: 'pierre-simple',
-        title: issue,
-        body: `- [ ] ${issue}`,
-        assignee: 'evanvin',
+    const issue = prompt(
+      'What issue would you like to add to the github project?',
+      ''
+    );
+    if (issue) {
+      axios.post(`${BASE_URL}/github_issue`, issue).then((res) => {
+        console.log(res);
+        this.setState({ list: [], itemNames: [] });
       });
-      console.log(x)
-    } else {
-      console.error('There was an error setting up Octokit.');
     }
   };
 
@@ -123,12 +119,6 @@ class App extends React.Component {
     const list = await axios.get(`${BASE_URL}/list`);
     const itemNames = list.data.map((i) => i.name);
     this.setState({ list: list.data, itemNames, isLoading: false });
-
-    if (process.env.REACT_APP_GITHUB_ACCESS_TOKEN) {
-      octokit = new Octokit({
-        auth: process.env.REACT_APP_GITHUB_ACCESS_TOKEN,
-      });
-    }
   }
 
   render() {
