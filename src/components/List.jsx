@@ -30,6 +30,16 @@ class List extends React.Component {
     }
   };
 
+  addGithubIssue = () => {
+    const issue = prompt(
+      'What issue would you like to add to the github project?',
+      ''
+    );
+    if (issue) {
+      this.props.createGithubIssue(issue);
+    }
+  };
+
   addItem = () => {
     const { itemNames, add } = this.props;
     const { itemToAdd } = this.state;
@@ -89,7 +99,8 @@ class List extends React.Component {
                 {list.length > 0 && (
                   <Navbar.Item
                     renderAs='div'
-                    className='ml'
+                    title='Print List'
+                    className='ml clickable'
                     onClick={(e) => {
                       window.confirm(
                         'Are you sure you want to print the list?'
@@ -104,6 +115,8 @@ class List extends React.Component {
                 )}
                 <Navbar.Item
                   renderAs='div'
+                  className='clickable'
+                  title='Clear Lists'
                   onClick={(e) => {
                     window.confirm(
                       'Are you sure you want to clear the list?'
@@ -116,6 +129,19 @@ class List extends React.Component {
                 >
                   <FontAwesomeIcon
                     icon={['fa', 'broom']}
+                    className='has-text-primary'
+                  />
+                </Navbar.Item>
+                <Navbar.Item
+                  renderAs='div'
+                  title='Add Github Issue'
+                  className='clickable'
+                  onClick={(e) => {
+                    this.addGithubIssue();
+                  }}
+                >
+                  <FontAwesomeIcon
+                    icon={['fa', 'ticket-alt']}
                     className='has-text-primary'
                   />
                 </Navbar.Item>

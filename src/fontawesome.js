@@ -11,6 +11,7 @@ import {
   faBan,
   faTag,
   faLayerGroup,
+  faTicketAlt,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -25,5 +26,6 @@ library.add(
   faPrint,
   faWrench,
   faBan,
-  faLayerGroup
+  faLayerGroup,
+  faTicketAlt
 );
