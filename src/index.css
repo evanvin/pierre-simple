@@ -103,6 +103,13 @@ span.item-name {
   text-overflow: ellipsis;
 }
 
+.loader-box-body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
 .loader-box {
   position: relative;
   background: var(--dark);
@@ -156,14 +163,13 @@ span.item-name {
 }
 
 @media only screen and (max-width: 450px) {
+  body{
+    display: block;
+  }
   span.item-name {
     max-width: 100px;
   }
-  div.desktop-add-item-bar {
+  div.mobile-item-hide {
     display: none;
-  }
-
-  nav.panel{
-    margin-top: 50px;
   }
 }

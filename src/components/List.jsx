@@ -162,7 +162,7 @@ class List extends React.Component {
               }}
             >
               <Panel>
-                <Box className='desktop-add-item-bar'>
+                <Box>
                   <Field kind='addons'>
                     <Control className='is-expanded'>
                       <Input
@@ -178,7 +178,7 @@ class List extends React.Component {
                         }}
                       />
                     </Control>
-                    <Control>
+                    <Control className='mobile-item-hide'>
                       <span className='select'>
                         <select
                           value={selectedStore}
@@ -196,7 +196,7 @@ class List extends React.Component {
                         </select>
                       </span>
                     </Control>
-                    <Control>
+                    <Control className='mobile-item-hide'>
                       <Input
                         onKeyPress={(e) => {
                           this.handleKeyPress(e);
@@ -219,7 +219,7 @@ class List extends React.Component {
                         <FontAwesomeIcon icon={['fa', 'plus']} />
                       </Button>
                     </Control>
-                    <Control>
+                    <Control className='mobile-item-hide'>
                       <Button renderAs='button'>
                         <FontAwesomeIcon
                           icon={['fa', 'ban']}

@@ -68,4 +68,4 @@ export const formatList = (items) => {
   return list;
 };
 
-export const SpinnerOverlay = <div className='loader-box'> </div>;
+export const SpinnerOverlay = <div className='loader-box-body'><div className='loader-box'> </div></div>;
