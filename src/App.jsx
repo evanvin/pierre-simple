@@ -5,7 +5,7 @@ import axios from 'axios';
 
 import List from './components/List';
 
-const BASE_URL = 'https://pierre-289818.uc.r.appspot.com';
+const BASE_URL = 'https://clovereartquakedog.pythonanywhere.com/pierre';
 
 class App extends React.Component {
   state = { list: [], itemNames: [], isLoading: true };
